@@ -24,6 +24,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="/commonstoolkit"/>
-	<classpathentry kind="src" path="/physicstoolkit"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
