@@ -36,6 +36,8 @@ import java.util.Random;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
 
+import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
+
 /**
  * This class provides methods that go slightly beyond the scope of
  * java.math.Math, such as additional trigonometry methods.
@@ -62,9 +64,11 @@ public final class MathUtilities {
 
     // Trigonometric functions.
     public static double sec( final double x ) {
+        // NOTE: Using home-grown NumberUtilities check for finite number for
+        //  now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
-        if ( !Double.isFinite( x ) ) {
+        //  period.
+        if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
 
@@ -77,9 +81,11 @@ public final class MathUtilities {
     }
 
     public static double cot( final double x ) {
+        // NOTE: Using home-grown NumberUtilities check for finite number for
+        //  now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
-        if ( !Double.isFinite( x ) ) {
+        //  period.
+        if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
 
@@ -92,9 +98,11 @@ public final class MathUtilities {
     }
 
     public static double csc( final double x ) {
+        // NOTE: Using home-grown NumberUtilities check for finite number for
+        //  now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
-        if ( !Double.isFinite( x ) ) {
+        //  period.
+        if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
 
