@@ -28,7 +28,7 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit;
+package com.mhschmieder.mathtoolkit.geometry;
 
 public enum Axis {
     X, Y, Z;

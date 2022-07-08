@@ -28,21 +28,24 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit;
+package com.mhschmieder.mathtoolkit.geometry.euclidian;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
+import com.mhschmieder.mathtoolkit.MathExt;
+import com.mhschmieder.mathtoolkit.geometry.OrthogonalAxes;
 
 /**
  * Utility methods for math; primarily consisting of basic entity methods on
  * points and lines.
  */
-public class MathUtilities {
+public class VectorUtilities {
 
     /**
      * The default constructor is disabled, as this is a static utilities class.
      */
-    private MathUtilities() {}
+    private VectorUtilities() {}
 
     public static Vector2D copyPoint2D( final Vector2D point2D ) {
         final Vector2D copiedPoint2D = new Vector2D( point2D.getX(), point2D.getY() );
@@ -70,7 +73,7 @@ public class MathUtilities {
     }
 
     /**
-     * Returns the distance between two points.
+     * Returns the distance between two point coordinate pairs.
      *
      * @param x1
      *            the X coordinate of the first specified point
@@ -80,20 +83,21 @@ public class MathUtilities {
      *            the X coordinate of the second specified point
      * @param y2
      *            the Y coordinate of the second specified point
-     * @return the distance between the two sets of specified coordinates.
+     * @return the distance between the two specified coordinate pairs.
      * @since 1.2
      */
     public static double distance( final double x1,
                                    final double y1,
                                    final double x2,
                                    final double y2 ) {
-        final double x1Adjusted = x1 - x2;
-        final double y1Adjusted = y1 - y2;
-        return Math.hypot( x1Adjusted, y1Adjusted );
+        final double dx = x1 - x2;
+        final double dy = y1 - y2;
+        return Math.hypot( dx, dy );
     }
 
     /**
-     * Returns the distance from this <code>Point2D</code> to a specified point.
+     * Returns the distance from one <code>Point2D</code> to another specified
+     * point coordinate pair.
      *
      * @param pt
      *            The point from which to measure distance
@@ -103,18 +107,34 @@ public class MathUtilities {
      * @param py
      *            the Y coordinate of the specified point to be measured against
      *            this <code>Point2D</code>
-     * @return the distance between this <code>Point2D</code> and a specified
-     *         point.
+     * @return the distance between one <code>Point2D</code> and another
+     *         specified point coordinate pair
      * @since 1.2
      */
     public static double distance( final Vector2D pt, final double px, final double py ) {
-        final double pxAdjusted = px - pt.getX();
-        final double pyAdjusted = py - pt.getY();
-        return Math.hypot( pxAdjusted, pyAdjusted );
+        final double dx = px - pt.getX();
+        final double dy = py - pt.getY();
+        return Math.hypot( dx, dy );
     }
 
     /**
-     * Returns the square of the distance between two points.
+     * Returns the distance from one <code>Point2D</code> to another specified
+     * <code>Point2D</code>.
+     *
+     * @param pt1
+     *            The reference point to use for measuring another point
+     * @param pt2
+     *            The specified point to be measured against the reference point
+     * @return the square of the distance between one <code>Point2D</code> and
+     *         another specified <code>Point2D</code>.
+     * @since 1.2
+     */
+    public static double distance( final Vector2D pt1, final Vector2D pt2 ) {
+        return pt1.distance( pt2 );
+    }
+
+    /**
+     * Returns the square of the distance between two points coordinate pairs.
      *
      * @param x1
      *            the X coordinate of the first specified point
@@ -124,22 +144,22 @@ public class MathUtilities {
      *            the X coordinate of the second specified point
      * @param y2
      *            the Y coordinate of the second specified point
-     * @return the square of the distance between the two sets of specified
-     *         coordinates.
+     * @return the square of the distance between the two specified coordinate
+     *         pairs.
      * @since 1.2
      */
     public static double distanceSq( final double x1,
                                      final double y1,
                                      final double x2,
                                      final double y2 ) {
-        final double x1Adjusted = x1 - x2;
-        final double y1Adjusted = y1 - y2;
-        return ( ( x1Adjusted * x1Adjusted ) + ( y1Adjusted * y1Adjusted ) );
+        final double dx = x1 - x2;
+        final double dy = y1 - y2;
+        return ( MathExt.sqr( dx ) + MathExt.sqr( dy ) );
     }
 
     /**
-     * Returns the square of the distance from this <code>Point2D</code> to a
-     * specified point.
+     * Returns the square of the distance from one <code>Point2D</code> to
+     * another specified point coordinate pair.
      *
      * @param point
      *            The point from which to measure distance
@@ -149,14 +169,14 @@ public class MathUtilities {
      * @param py
      *            the Y coordinate of the specified point to be measured against
      *            this <code>Point2D</code>
-     * @return the square of the distance between this <code>Point2D</code> and
-     *         the specified point.
+     * @return the square of the distance between one <code>Point2D</code> and
+     *         another specified point coordinate pair.
      * @since 1.2
      */
     public static double distanceSq( final Vector2D point, final double px, final double py ) {
-        final double pxAdjusted = px - point.getX();
-        final double pyAdjusted = py - point.getY();
-        return ( ( pxAdjusted * pxAdjusted ) + ( pyAdjusted * pyAdjusted ) );
+        final double dx = px - point.getX();
+        final double dy = py - point.getY();
+        return ( MathExt.sqr( dx ) + MathExt.sqr( dy ) );
     }
 
     /**
@@ -167,14 +187,11 @@ public class MathUtilities {
      *            The reference point to use for measuring another point
      * @param pt2
      *            The specified point to be measured against the reference point
-     * @return the square of the distance between this <code>Point2D</code> to a
-     *         specified <code>Point2D</code>.
+     * @return the square of the distance between one <code>Point2D</code> and
+     *         another specified <code>Point2D</code>.
      * @since 1.2
      */
     public static double distanceSq( final Vector2D pt1, final Vector2D pt2 ) {
-        final double px = pt2.getX() - pt1.getX();
-        final double py = pt2.getY() - pt1.getY();
-        return ( ( px * px ) + ( py * py ) );
+        return pt1.distanceSq( pt2 );
     }
-
 }

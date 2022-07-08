@@ -28,9 +28,12 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit;
-
-public enum OrthogonalAxes {
-    XY, XZ, YZ;
-
-}
+/**
+ * This package contains the MathToolkit Library's classes relating to
+ * Euclidian Geometry, in most cases wrapping Apache Commons Math functionality.
+ *
+ * @version 1.0
+ *
+ * @author Mark Schmieder
+ */
+package com.mhschmieder.mathtoolkit.geometry.euclidian;

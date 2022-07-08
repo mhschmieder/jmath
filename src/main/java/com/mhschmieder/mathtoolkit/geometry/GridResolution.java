@@ -28,13 +28,17 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit;
+package com.mhschmieder.mathtoolkit.geometry;
 
 import java.util.Locale;
 
 /**
  * The <code>GridResolution</code> enum is an enumeration of supported chart
  * grid resolutions for grid lines (major ticks) and/or minor ticks.
+ * <p>
+ * NOTE: This really belongs in the chart toolkit, but is included here for
+ *  now, as otherwise the JavaFX chart toolkit would have to depend on the
+ *  Graphics2D based chart toolkit for AWT and Swing.
  *
  * @version 1.0
  *
