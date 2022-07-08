@@ -28,37 +28,9 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit.geometry;
+package com.mhschmieder.mathtoolkit.geometry.euclidian;
 
-import java.util.Locale;
-
-/**
- * The <code>GridResolution</code> enum is an enumeration of supported chart
- * grid resolutions for grid lines (major ticks) and/or minor ticks.
- * <p>
- * NOTE: This really belongs in the chart toolkit, but is included here for
- *  now, as otherwise the JavaFX chart toolkit would have to depend on the
- *  Graphics2D based chart toolkit for AWT and Swing.
- *
- * @version 1.0
- *
- * @author Mark Schmieder
- */
-public enum GridResolution {
-    OFF, COARSE, MEDIUM, FINE;
-
-    public static final GridResolution defaultValue() {
-        return MEDIUM;
-    }
-
-    public static final GridResolution fromCanonicalString( final String gridResolutionCanonicalString ) {
-        return ( gridResolutionCanonicalString != null )
-            ? valueOf( gridResolutionCanonicalString.toUpperCase( Locale.ENGLISH ) )
-            : defaultValue();
-    }
-
-    public final String toCanonicalString() {
-        return toString().toLowerCase( Locale.ENGLISH );
-    }
+public enum Axis {
+    X, Y, Z;
 
 }

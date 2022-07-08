@@ -37,16 +37,15 @@ import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
 
 /**
- * This class provides methods and constants that are in the C run-time
- * library that were left out of java.math.Math, as well as other useful
- * methods that are core math functions.
+ * This class provides methods that go slightly beyond the scope of
+ * java.math.Math, such as additional trigonometry methods.
  */
-public final class MathExt {
+public final class MathUtilities {
 
     /**
      * The default constructor is disabled, as this is a static utilities class.
      */
-    private MathExt() {}
+    private MathUtilities() {}
 
     // Reference for random number generator, to make sure there is only one
     // instance each time an application that uses this class is invoked.
@@ -213,5 +212,104 @@ public final class MathExt {
     // Return the simple square of a double.
     public static double sqr( final double x ) {
         return x * x;
+    }
+
+    /**
+     * Returns a new {@link Complex} object from an existing {@link Complex}.
+     *
+     * @param z
+     *            A {@link Complex} object to use for cloning
+     * @return A new {@link Complex} object cloned from a reference
+     *         {@link Complex}
+     */
+    public static Complex cloneComplex( final Complex z ) {
+        final Complex newComplex = new Complex( z.getReal(), z.getImaginary() );
+        return newComplex;
+    }
+
+    /**
+     * Returns a new <tt>Complex</tt> from a magnitude and angle.
+     * <p>
+     * TODO: Remove this method once we switch to Apache Math for Complex.
+     *
+     * @param r
+     *            Magnitude
+     * @param theta
+     *            Angle (in <i>radians</i>)
+     * @return <tt>Complex</tt> from Polar coordinates
+     */
+    public static Complex polar2Complex( final double r, final double theta ) {
+        double rUnwrapped = r;
+        double thetaUnwrapped = theta;
+        if ( ( float ) rUnwrapped < 0f ) {
+            thetaUnwrapped += FastMath.PI;
+            rUnwrapped = -rUnwrapped;
+        }
+        thetaUnwrapped %= MathConstants.TWO_PI;
+
+        return new Complex( rUnwrapped * FastMath.cos( thetaUnwrapped ),
+                            rUnwrapped * FastMath.sin( thetaUnwrapped ) );
+    }
+
+    /**
+     * Returns a new {@link Complex} as the square of a referenced
+     * {@link Complex} value.
+     *
+     * @param z
+     *            A {@link Complex} object to use for computing the square
+     * @return <tt>Complex</tt> square z1 * z1
+     */
+    public static Complex sqrComplex( final Complex z ) {
+        return new Complex( sqr( z.getReal() ) - sqr( z.getImaginary() ),
+                            2.0d * ( z.getReal() * z.getImaginary() ) );
+    }
+
+    /**
+     * Returns the L2 norm of a {@code Complex} number, which is the sum of
+     * the squares of the real and imaginary parts.
+     *
+     * @param z
+     *            A {@link Complex} object to use to compute the norm
+     * @return a {@code double} containing the norm of the {@code Complex}
+     *         number
+     */
+    public static double norm( final Complex z ) {
+        return ( sqr( z.getReal() ) + sqr( z.getImaginary() ) );
+    }
+
+    /**
+     * Returns the phase of a {@code Complex} number. Note that this method
+     * duplicates the functionality of the {@code arg()} method.
+     *
+     * @param z
+     *            A {@link Complex} object to measure for phase
+     * @return Phase of <tt>Complex</tt> object in <i> radians</i>
+     */
+    public static double phase( final Complex z ) {
+        return FastMath.atan2( z.getImaginary(), z.getReal() );
+    }
+
+    /**
+     * Compares two <code>Complex</code> values numerically according to their
+     * absolute values.
+     *
+     * @param complex
+     *            the <code>Complex</code> value to be compared to.
+     * @param anotherComplex
+     *            the <code>Complex</code> to use for comparing to the first.
+     * @return the value <code>0</code> if the absolute value of the argument
+     *         <code>anotherComplex</code> is equal to the absolute value of
+     *         this <code>Complex</code>; a value less than <code>0</code> if
+     *         the absolute value of this <code>Complex</code> is numerically
+     *         less than the <code>Complex</code> argument; and a the absolute
+     *         value of this <code>Complex</code> is numerically greater than
+     *         the <code>Complex</code> argument. (signed comparison).
+     * @see java.lang.Comparable
+     */
+    public static int compareComplexValues( final Complex complex, final Complex anotherComplex ) {
+        final double thisVal = complex.abs();
+        final double anotherVal = anotherComplex.abs();
+
+        return ( thisVal < anotherVal ? -1 : ( thisVal == anotherVal ? 0 : 1 ) );
     }
 }

@@ -33,8 +33,7 @@ package com.mhschmieder.mathtoolkit.geometry.euclidian;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-import com.mhschmieder.mathtoolkit.MathExt;
-import com.mhschmieder.mathtoolkit.geometry.OrthogonalAxes;
+import com.mhschmieder.mathtoolkit.MathUtilities;
 
 /**
  * Utility methods for math; primarily consisting of basic entity methods on
@@ -154,7 +153,7 @@ public class VectorUtilities {
                                      final double y2 ) {
         final double dx = x1 - x2;
         final double dy = y1 - y2;
-        return ( MathExt.sqr( dx ) + MathExt.sqr( dy ) );
+        return ( MathUtilities.sqr( dx ) + MathUtilities.sqr( dy ) );
     }
 
     /**
@@ -176,7 +175,7 @@ public class VectorUtilities {
     public static double distanceSq( final Vector2D point, final double px, final double py ) {
         final double dx = px - point.getX();
         final double dy = py - point.getY();
-        return ( MathExt.sqr( dx ) + MathExt.sqr( dy ) );
+        return ( MathUtilities.sqr( dx ) + MathUtilities.sqr( dy ) );
     }
 
     /**

@@ -28,9 +28,9 @@
  *
  * Project: https://github.com/mhschmieder/mathtoolkit
  */
-package com.mhschmieder.mathtoolkit.geometry;
+package com.mhschmieder.mathtoolkit.geometry.euclidian;
 
-public enum Axis {
-    X, Y, Z;
+public enum OrthogonalAxes {
+    XY, XZ, YZ;
 
 }
