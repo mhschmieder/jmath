@@ -30,6 +30,8 @@
  */
 package com.mhschmieder.mathtoolkit;
 
+import org.apache.commons.math3.complex.Complex;
+
 /**
  * Container for mathematical constants.
  */

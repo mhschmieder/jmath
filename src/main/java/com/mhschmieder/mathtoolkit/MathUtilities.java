@@ -33,6 +33,7 @@ package com.mhschmieder.mathtoolkit;
 import java.math.BigDecimal;
 import java.util.Random;
 
+import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
 
@@ -65,9 +66,9 @@ public final class MathUtilities {
     // Trigonometric functions.
     public static double sec( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        //  now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        //  period.
+        // period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
@@ -82,9 +83,9 @@ public final class MathUtilities {
 
     public static double cot( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        //  now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        //  period.
+        // period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
@@ -99,9 +100,9 @@ public final class MathUtilities {
 
     public static double csc( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        //  now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 6.
         // TODO: Also check for non-computable values by first unwrapping the
-        //  period.
+        // period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
@@ -236,30 +237,6 @@ public final class MathUtilities {
     }
 
     /**
-     * Returns a new <tt>Complex</tt> from a magnitude and angle.
-     * <p>
-     * TODO: Remove this method once we switch to Apache Math for Complex.
-     *
-     * @param r
-     *            Magnitude
-     * @param theta
-     *            Angle (in <i>radians</i>)
-     * @return <tt>Complex</tt> from Polar coordinates
-     */
-    public static Complex polar2Complex( final double r, final double theta ) {
-        double rUnwrapped = r;
-        double thetaUnwrapped = theta;
-        if ( ( float ) rUnwrapped < 0f ) {
-            thetaUnwrapped += FastMath.PI;
-            rUnwrapped = -rUnwrapped;
-        }
-        thetaUnwrapped %= MathConstants.TWO_PI;
-
-        return new Complex( rUnwrapped * FastMath.cos( thetaUnwrapped ),
-                            rUnwrapped * FastMath.sin( thetaUnwrapped ) );
-    }
-
-    /**
      * Returns a new {@link Complex} as the square of a referenced
      * {@link Complex} value.
      *
@@ -314,7 +291,7 @@ public final class MathUtilities {
      *         the <code>Complex</code> argument. (signed comparison).
      * @see java.lang.Comparable
      */
-    public static int compareComplexValues( final Complex complex, final Complex anotherComplex ) {
+    public static int compare( final Complex complex, final Complex anotherComplex ) {
         final double thisVal = complex.abs();
         final double anotherVal = anotherComplex.abs();
 
