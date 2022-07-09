@@ -31,11 +31,17 @@
 package com.mhschmieder.mathtoolkit;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * Container for mathematical constants.
  */
 public final class MathConstants {
+
+    /**
+     * The default constructor is disabled, as this is a static constants class.
+     */
+    private MathConstants() {}
 
     /**
      * Constant representing <i><b>i</b></i>, the square root of -1. (For
@@ -44,11 +50,11 @@ public final class MathConstants {
     public static final Complex J                    = Complex.I;
 
     // For use in calculating log base 2. An ln(x) times this is a log base 2.
-    public static final double  LN2                  = StrictMath.log( 2.0d );
+    public static final double  LN2                  = FastMath.log( 2.0d );
     public static final double  LN2_SCALE            = 1.0d / LN2;
 
     // For use in calculating log base 10. An ln(x) times this is a log base 10.
-    public static final double  LN10                 = StrictMath.log( 10.0d );
+    public static final double  LN10                 = FastMath.log( 10.0d );
     public static final double  LN10_SCALE           = 1.0d / LN10;
 
     // Smallest relative spacing for doubles.
@@ -91,22 +97,22 @@ public final class MathConstants {
     public static final double  SEVEN_EIGHTHS        = 7.0d * ONE_EIGHTH;
 
     // Common square roots, cached for efficiency.
-    public static final double  SQRT_TWO             = StrictMath.sqrt( 2.0d );
-    public static final double  SQRT_THREE           = StrictMath.sqrt( 3.0d );
+    public static final double  SQRT_TWO             = FastMath.sqrt( 2.0d );
+    public static final double  SQRT_THREE           = FastMath.sqrt( 3.0d );
 
     // Euler's constant.
     public static final double  EULERS_CONSTANT      = 0.57721566490153286d;
 
     // Trigonometric constants.
-    public static final double  HALF_PI              = 0.5d * StrictMath.PI;
-    public static final double  TWO_PI               = 2.0d * StrictMath.PI;
-    public static final double  THREE_PI             = 3.0d * StrictMath.PI;
-    public static final double  FOUR_PI              = 4.0d * StrictMath.PI;
-    public static final double  FIVE_PI              = 5.0d * StrictMath.PI;
-    public static final double  SIX_PI               = 6.0d * StrictMath.PI;
-    public static final double  SEVEN_PI             = 7.0d * StrictMath.PI;
-    public static final double  EIGHT_PI             = 8.0d * StrictMath.PI;
-    public static final double  SQRT_TWO_PI          = StrictMath.sqrt( TWO_PI );
+    public static final double  HALF_PI              = 0.5d * FastMath.PI;
+    public static final double  TWO_PI               = 2.0d * FastMath.PI;
+    public static final double  THREE_PI             = 3.0d * FastMath.PI;
+    public static final double  FOUR_PI              = 4.0d * FastMath.PI;
+    public static final double  FIVE_PI              = 5.0d * FastMath.PI;
+    public static final double  SIX_PI               = 6.0d * FastMath.PI;
+    public static final double  SEVEN_PI             = 7.0d * FastMath.PI;
+    public static final double  EIGHT_PI             = 8.0d * FastMath.PI;
+    public static final double  SQRT_TWO_PI          = FastMath.sqrt( TWO_PI );
 
     // Gamma coefficients.
     public static final double  GAMMA_COEFFICIENTS[] = {

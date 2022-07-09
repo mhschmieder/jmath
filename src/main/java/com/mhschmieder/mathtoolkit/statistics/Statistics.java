@@ -33,6 +33,7 @@ package com.mhschmieder.mathtoolkit.statistics;
 import java.util.Arrays;
 
 import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * This class provides statistical methods which compute properties of a data
@@ -159,7 +160,7 @@ public final class Statistics {
 
         // Get the median. If an odd number of array elements, this is
         // trivially a query for the center element in the array.
-        final int medianIndex = ( int ) StrictMath.round( 0.5d * out.length );
+        final int medianIndex = ( int ) FastMath.round( 0.5d * out.length );
         if ( ( out.length % 2 ) == 0 ) {
             median = 0.5d * ( out[ medianIndex - 1 ] + out[ medianIndex ] );
         }
@@ -210,6 +211,6 @@ public final class Statistics {
     // is the sequence length, so it is the best unbiased estimate of standard
     // deviation if the data set is sampled from a normal distribution.
     public static double standardDeviation( final double[] x ) {
-        return StrictMath.sqrt( StatUtils.populationVariance( x ) );
+        return FastMath.sqrt( StatUtils.populationVariance( x ) );
     }
 }
