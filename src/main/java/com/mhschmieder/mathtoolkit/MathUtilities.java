@@ -30,7 +30,7 @@
  */
 package com.mhschmieder.mathtoolkit;
 
-import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 import org.apache.commons.math3.complex.Complex;
@@ -40,7 +40,7 @@ import org.apache.commons.math3.util.Precision;
 import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
 
 /**
- * This class provides methods that go slightly beyond the scope of
+ * This class provides methods that go slightly beyond the scope of core
  * java.math.Math, such as additional trigonometry methods.
  */
 public final class MathUtilities {
@@ -66,7 +66,7 @@ public final class MathUtilities {
     // Trigonometric functions.
     public static double sec( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
         // period.
         if ( !NumberUtilities.isFinite( x ) ) {
@@ -83,7 +83,7 @@ public final class MathUtilities {
 
     public static double cot( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
         // period.
         if ( !NumberUtilities.isFinite( x ) ) {
@@ -100,7 +100,7 @@ public final class MathUtilities {
 
     public static double csc( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 6.
+        // now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
         // period.
         if ( !NumberUtilities.isFinite( x ) ) {
@@ -157,34 +157,302 @@ public final class MathUtilities {
         return FastMath.log( x ) * MathConstants.LN2_SCALE;
     }
 
-    // Return a number rounded to the nth decimal place.
-    public static double nearestDecimal( final double number,
-                                         final int numberOfDigitsAfterDecimalPoint )
+    /**
+     * Rounds a float to the specified number of decimal places.
+     * 
+     * @param number
+     *            The float to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A float rounded to the specified decimal place
+     */
+    public static float roundDecimal( final float number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        // Use the classroom rounding method, not the one recommended by Apache
+        // Commons Math that is mostly relevant to USA based financial
+        // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
+        final float numberRounded = roundDecimal( number,
+                                                  numberOfDecimalPlaces,
+                                                  RoundingMode.HALF_UP.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds a double to the specified number of decimal places.
+     * 
+     * @param number
+     *            The double to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A double rounded to the specified decimal place
+     */
+    public static double roundDecimal( final double number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        // Use the classroom rounding method, not the one recommended by Apache
+        // Commons Math that is mostly relevant to USA based financial
+        // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
+        final double numberRounded = roundDecimal( number,
+                                                   numberOfDecimalPlaces,
+                                                   RoundingMode.HALF_UP.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds up a float to the specified number of decimal places.
+     * 
+     * @param number
+     *            The float to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A float rounded up to the specified decimal place
+     */
+    public static float roundUpDecimal( final float number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        final float numberRounded = roundDecimal( number,
+                                                  numberOfDecimalPlaces,
+                                                  RoundingMode.UP.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds up a double to the specified number of decimal places.
+     * 
+     * @param number
+     *            The double to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A double rounded up to the specified decimal place
+     */
+    public static double roundUpDecimal( final double number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        final double numberRounded = roundDecimal( number,
+                                                   numberOfDecimalPlaces,
+                                                   RoundingMode.UP.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds down a float to the specified number of decimal places.
+     * 
+     * @param number
+     *            The float to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A float rounded down to the specified decimal place
+     */
+    public static float roundDownDecimal( final float number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        final float numberRounded = roundDecimal( number,
+                                                  numberOfDecimalPlaces,
+                                                  RoundingMode.DOWN.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds down a double to the specified number of decimal places.
+     * 
+     * @param number
+     *            The double to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @return A double rounded down to the specified decimal place
+     */
+    public static double roundDownDecimal( final double number, final int numberOfDecimalPlaces )
+            throws IllegalArgumentException, NumberFormatException {
+        final double numberRounded = roundDecimal( number,
+                                                   numberOfDecimalPlaces,
+                                                   RoundingMode.DOWN.ordinal() );
+
+        return numberRounded;
+    }
+
+    /**
+     * Rounds a float to the specified number of decimal places given a provided
+     * rounding method.
+     * 
+     * @param number
+     *            The float to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @param roundingMethod
+     *            The rounding method to use, compatible with BigDecimal
+     * @return A float rounded to the specified decimal place with specific
+     *         rounding
+     */
+    public static float roundDecimal( final float number,
+                                      final int numberOfDecimalPlaces,
+                                      int roundingMethod )
             throws IllegalArgumentException, NumberFormatException {
         // Number of digits after decimal point < 0, is invalid input, so return
         // the number unchanged.
-        if ( numberOfDigitsAfterDecimalPoint < 0 ) {
+        if ( numberOfDecimalPlaces < 0 ) {
             throw new IllegalArgumentException();
         }
 
-        // Number of digits after decimal point = 0, means round to the nearest
-        // integer.
-        if ( numberOfDigitsAfterDecimalPoint == 0 ) {
-            return FastMath.round( number );
-        }
-
-        // Use the built-in BigDecimal class to do the work, as library code
-        // usually covers more edge cases than home-grown algorithms.
-        // NOTE: We use Apache Commons Math instead, which wraps the built-in
-        // BigDecimal class with safe edge case detection and handling.
-        // TODO: Check for Apache Commons Math updates, that are compatible
-        // with Java 12 and its removal of BigDecimal.ROUND_HALF_UP.
-        final double numberRounded = Precision
-                .round( number, numberOfDigitsAfterDecimalPoint, BigDecimal.ROUND_HALF_UP );
-        // final double numberRounded = Precision .round( number,
-        // numberOfDigitsAfterDecimalPoint, RoundingMode.HALF_UP );
+        // Use Apache Commons Math to do the rounding, which wraps FastMath with
+        // safe edge case detection and handling for zero decimal places, etc.
+        // TODO: Check Apache Commons Math Version 4 to see if anything replaces
+        // the removal of this method that was introduced in Version 3.
+        final float numberRounded =
+                                  Precision.round( number, numberOfDecimalPlaces, roundingMethod );
 
         return numberRounded;
+    }
+
+    /**
+     * Rounds a double to the specified number of decimal places given a
+     * provided rounding method.
+     * 
+     * @param number
+     *            The double to be rounded
+     * @param numberOfDecimalPlaces
+     *            The number of decimal places to preserve in rounding
+     * @param roundingMethod
+     *            The rounding method to use, compatible with BigDecimal
+     * @return A double rounded to the specified decimal place with specific
+     *         rounding
+     */
+    public static double roundDecimal( final double number,
+                                       final int numberOfDecimalPlaces,
+                                       int roundingMethod )
+            throws IllegalArgumentException, NumberFormatException {
+        // Number of digits after decimal point < 0, is invalid input, so return
+        // the number unchanged.
+        if ( numberOfDecimalPlaces < 0 ) {
+            throw new IllegalArgumentException();
+        }
+
+        // Use Apache Commons Math to do the rounding, which wraps FastMath with
+        // safe edge case detection and handling for zero decimal places, etc.
+        // TODO: Check Apache Commons Math Version 4 to see if anything replaces
+        // the removal of this method that was introduced in Version 3.
+        final double numberRounded =
+                                   Precision.round( number, numberOfDecimalPlaces, roundingMethod );
+
+        return numberRounded;
+    }
+
+    /**
+     * Discretizes a float to the nearest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The float to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The nearest multiple of a given multiplier to a specified float
+     */
+    public static float discretize( final float number, final float multiplier ) {
+        if ( multiplier == 0.0f ) {
+            return number;
+        }
+
+        final float result = multiplier * FastMath.round( number / multiplier );
+
+        return result;
+    }
+
+    /**
+     * Discretizes a double to the nearest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The double to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The nearest multiple of a given multiplier to a specified double
+     */
+    public static double discretize( final double number, final double multiplier ) {
+        if ( multiplier == 0.0d ) {
+            return number;
+        }
+
+        final double result = multiplier * FastMath.round( number / multiplier );
+
+        return result;
+    }
+
+    /**
+     * Discretizes a float to the next highest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The float to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The next highest multiple of a given multiplier to a specified
+     *         float
+     */
+    public static float discretizeUp( final float number, final float multiplier ) {
+        if ( multiplier == 0.0f ) {
+            return number;
+        }
+
+        final float result = ( float ) ( multiplier * FastMath.ceil( number / multiplier ) );
+
+        return result;
+    }
+
+    /**
+     * Discretizes a double to the next highest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The double to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The next highest multiple of a given multiplier to a specified
+     *         double
+     */
+    public static double discretizeUp( final double number, final double multiplier ) {
+        if ( multiplier == 0.0d ) {
+            return number;
+        }
+
+        final double result = multiplier * FastMath.ceil( number / multiplier );
+
+        return result;
+    }
+
+    /**
+     * Discretizes a float to the next lowest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The float to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The next lowest multiple of a given multiplier to a specified
+     *         float
+     */
+    public static float discretizeDown( final float number, final float multiplier ) {
+        if ( multiplier == 0.0f ) {
+            return number;
+        }
+
+        final float result = ( float ) ( multiplier * FastMath.floor( number / multiplier ) );
+
+        return result;
+    }
+
+    /**
+     * Discretizes a double to the next lowest multiple of a given multiplier.
+     * 
+     * @param number
+     *            The double to be discretized
+     * @param multiplier
+     *            The multiplier to use for discretization
+     * @return The next lowest multiple of a given multiplier to a specified
+     *         double
+     */
+    public static double discretizeDown( final double number, final double multiplier ) {
+        if ( multiplier == 0.0d ) {
+            return number;
+        }
+
+        final double result = multiplier * FastMath.floor( number / multiplier );
+
+        return result;
     }
 
     // Return a Rayleigh-distributed Gaussian random number.
