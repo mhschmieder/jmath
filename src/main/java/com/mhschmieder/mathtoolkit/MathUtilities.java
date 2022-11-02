@@ -56,19 +56,80 @@ public final class MathUtilities {
     // the same first random number, defeating the purpose altogether.
     private static Random _randomNumberGenerator = null;
 
-    public static double boundedValue( final double value, final double min, final double max ) {
-        // if max < value, return max
-        // if min > value, return min
-        // if min > max, return min
-        return FastMath.min( FastMath.max( value, min ), FastMath.max( min, max ) );
+    /**
+     * Returns the int value clamped within the inclusive range defined by
+     * <code>min</code> and <code>max</code>.
+     * <p>
+     * NOTE: This is a convenience method for higher performance than more
+     *  generalized options such as Apache Commons Lang's Range class, which
+     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * 
+     * @param value The int value to clamp
+     * @param min The minimum value in the range (inclusive)
+     * @param max The maximum value in the range (inclusive)
+     * @return The clamped int value, within the range
+     */
+    public static int clamp( final int value, final int min, final int max ) {
+        return FastMath.min(max, FastMath.max(min, value));
+    }
+
+    /**
+     * Returns the long value clamped within the inclusive range defined by
+     * <code>min</code> and <code>max</code>.
+     * <p>
+     * NOTE: This is a convenience method for higher performance than more
+     *  generalized options such as Apache Commons Lang's Range class, which
+     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * 
+     * @param value The long value to clamp
+     * @param min The minimum value in the range (inclusive)
+     * @param max The maximum value in the range (inclusive)
+     * @return The clamped long value, within the range
+     */
+    public static long clamp( final long value, final long min, final long max ) {
+        return FastMath.min(max, FastMath.max(min, value));
+    }
+
+    /**
+     * Returns the float value clamped within the inclusive range defined by
+     * <code>min</code> and <code>max</code>.
+     * <p>
+     * NOTE: This is a convenience method for higher performance than more
+     *  generalized options such as Apache Commons Lang's Range class, which
+     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * 
+     * @param value The float value to clamp
+     * @param min The minimum value in the range (inclusive)
+     * @param max The maximum value in the range (inclusive)
+     * @return The clamped float value, within the range
+     */
+    public static float clamp( final float value, final float min, final float max ) {
+        return FastMath.min(max, FastMath.max(min, value));
+    }
+
+    /**
+     * Returns the double value clamped within the inclusive range defined by
+     * <code>min</code> and <code>max</code>.
+     * <p>
+     * NOTE: This is a convenience method for higher performance than more
+     *  generalized options such as Apache Commons Lang's Range class, which
+     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * 
+     * @param value The double value to clamp
+     * @param min The minimum value in the range (inclusive)
+     * @param max The maximum value in the range (inclusive)
+     * @return The clamped double value, within the range
+     */
+    public static double clamp( final double value, final double min, final double max ) {
+        return FastMath.min(max, FastMath.max(min, value));
     }
 
     // Trigonometric functions.
     public static double sec( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 7.
+        //  now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
+        //  period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
@@ -83,9 +144,9 @@ public final class MathUtilities {
 
     public static double cot( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 7.
+        //  now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
+        //  period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
@@ -100,9 +161,9 @@ public final class MathUtilities {
 
     public static double csc( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
-        // now, as we currently have some clients that are stuck on Java 7.
+        //  now, as we currently have some clients that are stuck on Java 7.
         // TODO: Also check for non-computable values by first unwrapping the
-        // period.
+        //  period.
         if ( !NumberUtilities.isFinite( x ) ) {
             return Double.NaN;
         }
