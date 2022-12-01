@@ -59,16 +59,23 @@ public class VectorUtilities {
 
     public static Vector3D exchangeCoordinates( final Vector3D point3D,
                                                 final OrthogonalAxes orthogonalAxes ) {
+        Vector3D swappedPoint = Vector3D.ZERO;
+        
         switch ( orthogonalAxes ) {
         case XY:
-            return new Vector3D( point3D.getY(), point3D.getX(), point3D.getZ() );
+            swappedPoint = new Vector3D( point3D.getY(), point3D.getX(), point3D.getZ() );
+            break;
         case XZ:
-            return new Vector3D( point3D.getZ(), point3D.getY(), point3D.getX() );
+            swappedPoint = new Vector3D( point3D.getZ(), point3D.getY(), point3D.getX() );
+            break;
         case YZ:
-            return new Vector3D( point3D.getX(), point3D.getZ(), point3D.getY() );
+            swappedPoint = new Vector3D( point3D.getX(), point3D.getZ(), point3D.getY() );
+            break;
         default:
-            return Vector3D.ZERO;
+            break; 
         }
+        
+        return swappedPoint;
     }
 
     /**
