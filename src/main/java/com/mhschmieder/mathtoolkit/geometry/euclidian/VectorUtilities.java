@@ -32,6 +32,7 @@ package com.mhschmieder.mathtoolkit.geometry.euclidian;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 import com.mhschmieder.mathtoolkit.MathUtilities;
 
@@ -98,7 +99,7 @@ public class VectorUtilities {
                                    final double y2 ) {
         final double dx = x1 - x2;
         final double dy = y1 - y2;
-        return Math.hypot( dx, dy );
+        return FastMath.hypot( dx, dy );
     }
 
     /**
@@ -120,7 +121,7 @@ public class VectorUtilities {
     public static double distance( final Vector2D pt, final double px, final double py ) {
         final double dx = px - pt.getX();
         final double dy = py - pt.getY();
-        return Math.hypot( dx, dy );
+        return FastMath.hypot( dx, dy );
     }
 
     /**
