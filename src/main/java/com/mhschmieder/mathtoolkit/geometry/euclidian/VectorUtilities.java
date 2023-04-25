@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2020, 2022 Mark Schmieder
+ * Copyright (c) 2020, 2023 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -103,18 +103,18 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the distance from one <code>Point2D</code> to another specified
+     * Returns the distance from one <code>Vector2D</code> to another specified
      * point coordinate pair.
      *
      * @param pt
      *            The point from which to measure distance
      * @param px
      *            the X coordinate of the specified point to be measured against
-     *            this <code>Point2D</code>
+     *            this <code>Vector2D</code>
      * @param py
      *            the Y coordinate of the specified point to be measured against
-     *            this <code>Point2D</code>
-     * @return the distance between one <code>Point2D</code> and another
+     *            this <code>Vector2D</code>
+     * @return the distance between one <code>Vector2D</code> and another
      *         specified point coordinate pair
      * @since 1.2
      */
@@ -125,15 +125,15 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the distance from one <code>Point2D</code> to another specified
-     * <code>Point2D</code>.
+     * Returns the distance from one <code>Vector2D</code> to another specified
+     * <code>Vector2D</code>.
      *
      * @param pt1
      *            The reference point to use for measuring another point
      * @param pt2
      *            The specified point to be measured against the reference point
-     * @return the square of the distance between one <code>Point2D</code> and
-     *         another specified <code>Point2D</code>.
+     * @return the square of the distance between one <code>Vector2D</code> and
+     *         another specified <code>Vector2D</code>.
      * @since 1.2
      */
     public static double distance( final Vector2D pt1, final Vector2D pt2 ) {
@@ -165,18 +165,18 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the square of the distance from one <code>Point2D</code> to
+     * Returns the square of the distance from one <code>Vector2D</code> to
      * another specified point coordinate pair.
      *
      * @param point
      *            The point from which to measure distance
      * @param px
      *            the X coordinate of the specified point to be measured against
-     *            this <code>Point2D</code>
+     *            this <code>Vector2D</code>
      * @param py
      *            the Y coordinate of the specified point to be measured against
-     *            this <code>Point2D</code>
-     * @return the square of the distance between one <code>Point2D</code> and
+     *            this <code>Vector2D</code>
+     * @return the square of the distance between one <code>Vector2D</code> and
      *         another specified point coordinate pair.
      * @since 1.2
      */
@@ -187,15 +187,15 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the square of the distance from one <code>Point2D</code> to
-     * another specified <code>Point2D</code>.
+     * Returns the square of the distance from one <code>Vector2D</code> to
+     * another specified <code>Vector2D</code>.
      *
      * @param pt1
      *            The reference point to use for measuring another point
      * @param pt2
      *            The specified point to be measured against the reference point
-     * @return the square of the distance between one <code>Point2D</code> and
-     *         another specified <code>Point2D</code>.
+     * @return the square of the distance between one <code>Vector2D</code> and
+     *         another specified <code>Vector2D</code>.
      * @since 1.2
      */
     public static double distanceSq( final Vector2D pt1, final Vector2D pt2 ) {
