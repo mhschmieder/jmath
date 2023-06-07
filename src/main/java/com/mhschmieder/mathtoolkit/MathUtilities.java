@@ -125,31 +125,6 @@ public final class MathUtilities {
     }
 
     /**
-     * Unwraps an angle to just within the inclusive-exclusive range of [ 0, 360 )
-     * degrees. A typical use is to avoid the potential ambiguity of both zero and
-     * 360 degrees showing up in a coordinate set. Also use this to unwrap period.
-     * <p>
-     * This method's results cannot be achieved using normalizeAngleDegrees() as we
-     * could end up unnecessarily adding 360 degrees to all positive angles.
-     * 
-     * @param angleDegrees angle to unwrap
-     * @return an angle in degrees that is unwrapped to be in the [ 0, 360 ) range
-     */
-    public static double unwrapAngleDegrees( final double angleDegrees ) {
-        double unwrappedAngleDegrees = angleDegrees;
-
-        while ( unwrappedAngleDegrees < 0.0d ) {
-            unwrappedAngleDegrees += 360.0d;
-        }
-
-        while ( unwrappedAngleDegrees >= 360.0d ) {
-            unwrappedAngleDegrees -= 360.0d;
-        }
-
-        return unwrappedAngleDegrees;
-    }
-
-    /**
      * Normalize an angle in a 2&pi; wide interval around a center value.
      * <p>
      * This method is needed when calculations are to stay in degrees other than
@@ -175,6 +150,64 @@ public final class MathUtilities {
         }
 
         return normalizedAngleDegrees;
+    }
+
+    /**
+     * Unwraps an angle to just within the inclusive-exclusive range of [ 0, 360 )
+     * degrees. A typical use is to avoid the potential ambiguity of both zero and
+     * 360 degrees showing up in a coordinate set. Also use this to unwrap period.
+     * <p>
+     * This method's results cannot be achieved using normalizeAngleDegrees() as we
+     * could end up unnecessarily adding 360 degrees to all positive angles.
+     * 
+     * @param angleDegrees angle to unwrap
+     * @return an angle in degrees that is unwrapped to be in the [ 0, 360 ) range
+     */
+    public static double unwrapAngleDegrees( final double angleDegrees ) {
+        double unwrappedAngleDegrees = angleDegrees;
+
+        while ( unwrappedAngleDegrees < 0.0d ) {
+            unwrappedAngleDegrees += 360.0d;
+        }
+
+        while ( unwrappedAngleDegrees >= 360.0d ) {
+            unwrappedAngleDegrees -= 360.0d;
+        }
+
+        return unwrappedAngleDegrees;
+    }
+
+    /**
+     * Unwraps an angle to a specified range, as long as that range is at least a
+     * full period (360 degrees). This is not the same as the standard unwrap 
+     * method as it isn't bound to [0, 360 ) and can include the maximum angle.
+     * <p>
+     * This method is most useful as enforcer of clamping and conversion or
+     * normalization of user entered values in a GUI text editor or angle slider.
+     * 
+     * @param angleDegrees angle to unwrap
+     * @param minimumAngleDegrees the minimum angle to bound the period unwrapping
+     * @param maximumAngleDegrees the maximum angle to bound the period unwrapping
+     * @return an angle in degrees that is unwrapped to be in a [ min, max ] range
+     */
+    public static double unwrapAngleRangeDegrees( final double angleDegrees,
+                                                  final double minimumAngleDegrees,
+                                                  final double maximumAngleDegrees ) {
+        if ( ( maximumAngleDegrees - minimumAngleDegrees ) < 360.0d ) {
+            return angleDegrees;
+        }
+
+        double unwrappedAngleDegrees = angleDegrees;
+        
+        while ( unwrappedAngleDegrees < minimumAngleDegrees) {
+            unwrappedAngleDegrees += 360.0d;
+        }
+
+        while ( unwrappedAngleDegrees > maximumAngleDegrees ) {
+            unwrappedAngleDegrees -= 360.0d;
+        }
+
+        return unwrappedAngleDegrees;
     }
     
     // Trigonometric functions.
