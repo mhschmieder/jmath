@@ -124,6 +124,59 @@ public final class MathUtilities {
         return FastMath.min(max, FastMath.max(min, value));
     }
 
+    /**
+     * Unwraps an angle to just within the inclusive-exclusive range of [ 0, 360 )
+     * degrees. A typical use is to avoid the potential ambiguity of both zero and
+     * 360 degrees showing up in a coordinate set. Also use this to unwrap period.
+     * <p>
+     * This method's results cannot be achieved using normalizeAngleDegrees() as we
+     * could end up unnecessarily adding 360 degrees to all positive angles.
+     * 
+     * @param angleDegrees angle to unwrap
+     * @return an angle in degrees that is unwrapped to be in the [ 0, 360 ) range
+     */
+    public static double unwrapAngleDegrees( final double angleDegrees ) {
+        double unwrappedAngleDegrees = angleDegrees;
+
+        while ( unwrappedAngleDegrees < 0.0d ) {
+            unwrappedAngleDegrees += 360.0d;
+        }
+
+        while ( unwrappedAngleDegrees >= 360.0d ) {
+            unwrappedAngleDegrees -= 360.0d;
+        }
+
+        return unwrappedAngleDegrees;
+    }
+
+    /**
+     * Normalize an angle in a 2&pi; wide interval around a center value.
+     * <p>
+     * This method is needed when calculations are to stay in degrees other than
+     * radians; if in radians, use Apache Commons Math normalizeAngle().
+     * <p>
+     * A typical use is to unwrap phase, by passing zero as the center angle.
+     * 
+     * @param angleDegrees angle to normalize
+     * @param centerAngleDegrees center of the desired 2&pi; interval for the result
+     * @return an angle in degrees that is normalized between centerAngleDegrees-180
+     * degrees and 180-centerAngleDegrees
+     */
+    public static double normalizeAngleDegrees( final double angleDegrees, 
+                                                final double centerAngleDegrees ) {
+        double normalizedAngleDegrees = angleDegrees;
+
+        while ( normalizedAngleDegrees < centerAngleDegrees - 180.0d ) {
+            normalizedAngleDegrees += 360.0d;
+        }
+
+        while ( normalizedAngleDegrees > 180.0d - centerAngleDegrees ) {
+            normalizedAngleDegrees -= 360.0d;
+        }
+
+        return normalizedAngleDegrees;
+    }
+    
     // Trigonometric functions.
     public static double sec( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
