@@ -125,6 +125,18 @@ public final class MathUtilities {
     }
 
     /**
+     * Flip an angle to its opposite compass value, and unwrap the resulting value.
+     * <p>
+     * @param angleDegrees angle to flip
+     * @return an angle in degrees that is flipped to its opposite compass value
+     */
+    public static double flipAngleDegrees( final double angleDegrees ) {
+        double flippedAngleDegrees = angleDegrees - 180.0d;
+
+        return unwrapAngleDegrees( flippedAngleDegrees );
+    }
+
+    /**
      * Normalize an angle in a 2&pi; wide interval around a center value.
      * <p>
      * This method is needed when calculations are to stay in degrees other than
