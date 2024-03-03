@@ -613,8 +613,70 @@ public final class MathUtilities {
 
         return result;
     }
+    
+    /**
+     * Returns a step size that is discretized according to the initial value's
+     * nearest power of ten. This method is typically used for determining grid
+     * line resolution for views and charts. It is a bit of a placeholder hack.
+     * 
+     * @param initialStepSize The initial non-discretized step size to discretize
+     * @return A step size that is discretized according to an initial value's 
+     * nearest power of ten
+     */
+    public static double getDecimalStepSize( final double initialStepSize ) {
+        double discretizedStepSize = 0.0000000001d;
+        
+        if ( initialStepSize > 1000.0d ) {
+            discretizedStepSize = discretize( initialStepSize, 1000.0d );
+        }
+        else if ( initialStepSize > 100.0d ) {
+            discretizedStepSize = discretize( initialStepSize, 100.0d );
+        }
+        else if ( initialStepSize > 10.0d ) {
+            discretizedStepSize = discretize( initialStepSize, 10.0d );
+        }
+        else if ( initialStepSize > 1.0d ) {
+            discretizedStepSize = discretize( initialStepSize, 1.0d );
+        }
+        else if ( initialStepSize > 0.1d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.1d );
+        }
+        else if ( initialStepSize > 0.01d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.01d );
+        }
+        else if ( initialStepSize > 0.001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.001d );
+        }
+        else if ( initialStepSize > 0.0001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.0001d );
+        }
+        else if ( initialStepSize > 0.00001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.00001d );
+        }
+        else if ( initialStepSize > 0.000001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.000001d );
+        }
+        else if ( initialStepSize > 0.0000001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.0000001d );
+        }
+        else if ( initialStepSize > 0.00000001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.00000001d );
+        }
+        else if ( initialStepSize > 0.000000001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.000000001d );
+        }
+        else if ( initialStepSize > 0.0000000001d ) {
+            discretizedStepSize = discretize( initialStepSize, 0.0000000001d );
+        }
+        
+        return discretizedStepSize;
+    }
 
-    // Return a Rayleigh-distributed Gaussian random number.
+    /**
+     * Returns a Rayleigh-distributed Gaussian random number.
+     * 
+     * @return a Rayleigh-distributed Gaussian random number
+     */
     public static double nextRayleighRandom() {
         if ( _randomNumberGenerator == null ) {
             _randomNumberGenerator = new Random();
