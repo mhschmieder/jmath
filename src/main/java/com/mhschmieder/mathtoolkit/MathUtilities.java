@@ -707,7 +707,42 @@ public final class MathUtilities {
         return valAdjusted;
     }
 
-    // Return the simple square of a double.
+    /**
+     * Returns the simple square of an integer. 
+     * 
+     * @param x the integer to square
+     * @return the simple square of an integer
+     */
+    public static int sqr( final int x ) {
+        return x * x;
+    }
+
+    /**
+     * Returns the simple square of a long. 
+     * 
+     * @param x the long integer to square
+     * @return the simple square of a long
+     */
+    public static long sqr( final long x ) {
+        return x * x;
+    }
+
+    /**
+     * Returns the simple square of a float. 
+     * 
+     * @param x the single-precision number to square
+     * @return the simple square of a float
+     */
+    public static float sqr( final float x ) {
+        return x * x;
+    }
+
+    /**
+     * Returns the simple square of a double. 
+     * 
+     * @param x the double-precision number to square
+     * @return the simple square of a double
+     */
     public static double sqr( final double x ) {
         return x * x;
     }
