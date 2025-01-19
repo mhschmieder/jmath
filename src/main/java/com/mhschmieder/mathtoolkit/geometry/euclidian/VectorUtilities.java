@@ -264,10 +264,10 @@ public class VectorUtilities {
      * @param y2 the Y coordinate of the end endpoint
      * @return the point in the middle of the two specified points
      */
-    public Vector2D midpoint( final double x1, 
-                              final double y1,
-                              final double x2,
-                              final double y2 ) {
+    public static Vector2D midpoint( final double x1, 
+                                     final double y1,
+                                     final double x2,
+                                     final double y2 ) {
         return new Vector2D(
                 0.5d * ( x2 - x1 ),
                 0.5d * ( y2 - y1 ) );
@@ -284,8 +284,8 @@ public class VectorUtilities {
      * @return the point in the middle of the two specified points
      * @throws NullPointerException if either specified {@code point} is null
      */
-    public Vector2D midpoint( final Vector2D pt1,
-                              final Vector2D pt2 ) {
+    public static Vector2D midpoint( final Vector2D pt1,
+                                     final Vector2D pt2 ) {
         return midpoint( pt1.getX(), pt1.getY(), pt2.getX(), pt2.getY() );
     }
 
