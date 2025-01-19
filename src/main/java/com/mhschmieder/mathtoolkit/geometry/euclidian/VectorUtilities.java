@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2020, 2023 Mark Schmieder
+ * Copyright (c) 2020, 2025 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -252,6 +252,41 @@ public class VectorUtilities {
      */
     public static double distanceSq( final Vector2D pt1, final Vector2D pt2 ) {
         return pt1.distanceSq( pt2 );
+    }
+
+    /**
+     * Returns a point which lies in the middle between one coordinate pair
+     * and another coordinate pair.
+     *
+     * @param x1 the X coordinate of the start endpoint
+     * @param y1 the Y coordinate of the start endpoint
+     * @param x2 the X coordinate of the end endpoint
+     * @param y2 the Y coordinate of the end endpoint
+     * @return the point in the middle of the two specified points
+     */
+    public Vector2D midpoint( final double x1, 
+                              final double y1,
+                              final double x2,
+                              final double y2 ) {
+        return new Vector2D(
+                0.5d * ( x2 - x1 ),
+                0.5d * ( y2 - y1 ) );
+    }
+
+    /**
+     * Returns a point which lies in the middle between one <code>Vector2D</code>
+     * and another specified <code>Vector2D</code>.
+     *
+     * @param pt1
+     *            The start point to use for finding the midpoint
+     * @param pt2
+     *            The end point to use for finding the midpoint
+     * @return the point in the middle of the two specified points
+     * @throws NullPointerException if either specified {@code point} is null
+     */
+    public Vector2D midpoint( final Vector2D pt1,
+                              final Vector2D pt2 ) {
+        return midpoint( pt1.getX(), pt1.getY(), pt2.getX(), pt2.getY() );
     }
 
     /**
