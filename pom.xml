@@ -77,6 +77,7 @@
                 <configuration>
                     <show>private</show>
                     <docfilessubdirs>true</docfilessubdirs>
+                    <failOnError>false</failOnError>
                     <linksource>true</linksource>
                 </configuration>
                 <executions>
