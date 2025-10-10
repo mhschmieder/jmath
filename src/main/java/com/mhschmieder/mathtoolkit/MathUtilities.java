@@ -30,14 +30,13 @@
  */
 package com.mhschmieder.mathtoolkit;
 
-import java.math.RoundingMode;
-import java.util.Random;
-
+import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
 
-import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
+import java.math.RoundingMode;
+import java.util.Random;
 
 /**
  * This class provides methods that go slightly beyond the scope of core

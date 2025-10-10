@@ -30,11 +30,10 @@
  */
 package com.mhschmieder.mathtoolkit.geometry.euclidian;
 
+import com.mhschmieder.mathtoolkit.MathUtilities;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
-
-import com.mhschmieder.mathtoolkit.MathUtilities;
 
 /**
  * Utility methods for math; primarily consisting of basic entity methods on

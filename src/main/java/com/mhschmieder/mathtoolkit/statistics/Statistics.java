@@ -30,10 +30,10 @@
  */
 package com.mhschmieder.mathtoolkit.statistics;
 
-import java.util.Arrays;
-
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
+
+import java.util.Arrays;
 
 /**
  * This class provides statistical methods which compute properties of a data
