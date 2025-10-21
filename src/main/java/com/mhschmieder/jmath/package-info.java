@@ -21,19 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the MathToolkit Library
+ * This file is part of the JMath Library
  *
  * You should have received a copy of the MIT License along with the
- * MathToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
+ * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/mathtoolkit
+ * Project: https://github.com/mhschmieder/jmath
  */
 /**
- * This package contains the MathToolkit Library's classes relating to
- * Statistics, in most cases wrapping Apache Commons Math functionality.
+ * This package contains the JMath Library's highest-level classes.
  *
  * @version 1.0
  *
  * @author Mark Schmieder
  */
-package com.mhschmieder.mathtoolkit.statistics;
+package com.mhschmieder.jmath;

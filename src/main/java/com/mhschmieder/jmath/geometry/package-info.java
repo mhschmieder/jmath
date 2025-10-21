@@ -21,16 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the MathToolkit Library
+ * This file is part of the JMath Library
  *
  * You should have received a copy of the MIT License along with the
- * MathToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
+ * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/mathtoolkit
+ * Project: https://github.com/mhschmieder/jmath
  */
-package com.mhschmieder.mathtoolkit.geometry.euclidian;
-
-public enum Axis {
-    X, Y, Z;
-
-}
+/**
+ * This package contains the JMath Library's classes relating to general
+ * Geometry, primarily focused on convenient enumerations for core concepts.
+ *
+ * @version 1.0
+ *
+ * @author Mark Schmieder
+ */
+package com.mhschmieder.jmath.geometry;

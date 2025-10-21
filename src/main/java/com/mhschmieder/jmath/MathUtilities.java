@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the MathToolkit Library
+ * This file is part of the JMath Library
  *
  * You should have received a copy of the MIT License along with the
- * MathToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
+ * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/mathtoolkit
+ * Project: https://github.com/mhschmieder/jmath
  */
-package com.mhschmieder.mathtoolkit;
+package com.mhschmieder.jmath;
 
-import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
+import com.mhschmieder.jcommons.lang.NumberUtilities;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;

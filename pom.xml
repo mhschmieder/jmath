@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mhschmieder</groupId>
-    <artifactId>mathtoolkit</artifactId>
+    <artifactId>jmath</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>mathtoolkit</name>
-    <url>https://github.com/mhschmieder/mathtoolkit</url>
+    <name>jmath</name>
+    <url>https://github.com/mhschmieder/jmath</url>
     <description>Math utilities and custom classes for Java.</description>
 
     <licenses>
@@ -21,9 +21,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/mhschmieder/mathtoolkit</url>
-        <connection>scm:git:git://github.com/mhschmieder/mathtoolkit.git</connection>
-        <developerConnection>scm:git:git@github.com:mhschmieder/mathtoolkit.git</developerConnection>
+        <url>https://github.com/mhschmieder/jmath</url>
+        <connection>scm:git:git://github.com/mhschmieder/jmath.git</connection>
+        <developerConnection>scm:git:git@github.com:mhschmieder/jmath.git</developerConnection>
     </scm>
 
     <developers>
@@ -47,7 +47,7 @@
         </dependency>
         <dependency>
             <groupId>com.mhschmieder</groupId>
-            <artifactId>commonstoolkit</artifactId>
+            <artifactId>jcommons</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
