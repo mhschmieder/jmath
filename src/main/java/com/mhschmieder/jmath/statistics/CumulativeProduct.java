@@ -144,7 +144,7 @@ public class CumulativeProduct {
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[startIndex-1] * ... * x[stopIndex]</code>.
      *
@@ -192,6 +192,8 @@ public class CumulativeProduct {
      * @param x
      *            The <code>List</code> of doubles for which to compute the
      *            cumulative product.
+     * @param startIndex the first index to use for accumulation in the list
+     * @param stopIndex the final index to use for accumulation in the list
      * @return A reference to <code>x</code>.
      */
     public static List< Double > cumprod( final List< Double > x,
