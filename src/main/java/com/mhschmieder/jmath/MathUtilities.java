@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the JMath Library
+ * This file is part of the jmath library
  *
- * You should have received a copy of the MIT License along with the
- * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
+ * You should have received a copy of the MIT License along with the jmath
+ * library. If not, see <https://opensource.org/licenses/MIT>.
  *
  * Project: https://github.com/mhschmieder/jmath
  */
@@ -34,9 +34,12 @@ import com.mhschmieder.jcommons.lang.NumberUtilities;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
+import org.apache.commons.rng.UniformRandomProvider;
+import org.apache.commons.rng.core.source32.Well44497b;
+import org.apache.commons.rng.sampling.distribution.BoxMullerNormalizedGaussianSampler;
+import org.apache.commons.rng.sampling.distribution.SharedStateContinuousSampler;
 
 import java.math.RoundingMode;
-import java.util.Random;
 
 /**
  * This class provides methods that go slightly beyond the scope of core
@@ -49,11 +52,21 @@ public final class MathUtilities {
      */
     private MathUtilities() {}
 
-    // Reference for random number generator, to make sure there is only one
-    // instance each time an application that uses this class is invoked.
-    // Otherwise, successive calls would use the same root and generally find
-    // the same first random number, defeating the purpose altogether.
-    private static Random _randomNumberGenerator = null;
+    /**
+     * Random seed array to use for consistent results on repeat uses of any
+     * available distribution model. Reset if repeatable sequence isn't wanted.
+     */
+    public static int[] randomSeeds;
+
+    /**
+     * Reference for random number provider, to make sure there is only one
+     * instance each time an application that uses this class is invoked.
+     * Otherwise, successive calls would use the same root and generally find
+     * the same first random number, defeating the purpose altogether.
+     * <p>
+     * NOTE: We use the lazy-init approach, waiting until needed to construct.
+     */
+    private static UniformRandomProvider randomProvider = null;
 
     /**
      * Returns the int value clamped within the inclusive range defined by
@@ -677,13 +690,19 @@ public final class MathUtilities {
      * @return a Rayleigh-distributed Gaussian random number
      */
     public static double nextRayleighRandom() {
-        if ( _randomNumberGenerator == null ) {
-            _randomNumberGenerator = new Random();
+        // NOTE: Switch to Well19937c as provider if Well44497b is too slow.
+        if ( randomProvider == null ) {
+            randomProvider = new Well44497b( randomSeeds );
         }
 
-        final double x = _randomNumberGenerator.nextGaussian();
-        final double y = _randomNumberGenerator.nextGaussian();
+        final SharedStateContinuousSampler sampler
+                = BoxMullerNormalizedGaussianSampler.of( randomProvider );
 
+        final double x = sampler.sample();
+        final double y = sampler.sample();
+
+        // NOTE: This does not follow textbook examples and should probably be
+        //  replaced at some point. Apache Commons RNG doesn't have Rayleigh.
         return FastMath.hypot( x, y );
     }
     
