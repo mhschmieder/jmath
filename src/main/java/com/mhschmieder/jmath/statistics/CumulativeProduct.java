@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the JMath Library
+ * This file is part of the jmath Library
  *
- * You should have received a copy of the MIT License along with the
- * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
+ * You should have received a copy of the MIT License along with the jmath
+ * Library. If not, see <https://opensource.org/licenses/MIT>.
  *
  * Project: https://github.com/mhschmieder/jmath
  */
@@ -83,7 +83,9 @@ public class CumulativeProduct {
      *            product
      * @return A reference to <code>x</code>.
      */
-    public static double[] cumprod( final double[] x, final int startIndex, final int stopIndex ) {
+    public static double[] cumprod( final double[] x,
+                                    final int startIndex,
+                                    final int stopIndex ) {
         for ( int i = startIndex; i <= stopIndex; i++ ) {
             x[ i ] *= x[ i - 1 ];
         }
@@ -120,7 +122,9 @@ public class CumulativeProduct {
      *            product
      * @return A reference to <code>x</code>.
      */
-    public static int[] cumprod( final int[] x, final int startIndex, final int stopIndex ) {
+    public static int[] cumprod( final int[] x,
+                                 final int startIndex,
+                                 final int stopIndex ) {
         for ( int i = startIndex; i <= stopIndex; i++ ) {
             x[ i ] *= x[ i - 1 ];
         }
@@ -159,7 +163,9 @@ public class CumulativeProduct {
      *            product
      * @return A reference to <code>x</code>.
      */
-    public static long[] cumprod( final long[] x, final int startIndex, final int stopIndex ) {
+    public static long[] cumprod( final long[] x,
+                                  final int startIndex,
+                                  final int stopIndex ) {
         for ( int i = startIndex; i <= stopIndex; i++ ) {
             x[ i ] *= x[ i - 1 ];
         }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2020, 2026 Mark Schmieder. All rights reserved.
+ * Copyright (c) 2026 Mark Schmieder. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the JMath Library
+ * This file is part of the jmath Library
  *
- * You should have received a copy of the MIT License along with the
- * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
+ * You should have received a copy of the MIT License along with the jmath
+ * Library. If not, see <https://opensource.org/licenses/MIT>.
  *
  * Project: https://github.com/mhschmieder/jmath
  */
-package com.mhschmieder.jmath.geometry.euclidian;
-
-public enum Axis {
-    X, Y, Z;
-
+module jmath {
+    exports com.mhschmieder.jmath;
+    exports com.mhschmieder.jmath.geometry.euclidean;
+    exports com.mhschmieder.jmath.logic;
+    exports com.mhschmieder.jmath.random;
+    exports com.mhschmieder.jmath.statistics;
+    requires commons.math3;
+    requires jcommons;
+    requires org.apache.commons.rng.api;
+    requires org.apache.commons.rng.core;
+    requires org.apache.commons.rng.sampling;
+    requires org.apache.commons.rng.simple;
 }

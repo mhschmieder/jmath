@@ -28,12 +28,8 @@
  *
  * Project: https://github.com/mhschmieder/jmath
  */
-/**
- * This package contains the jmath Library's classes relating to Statistics, in
- * most cases wrapping Apache Commons Math functionality.
- *
- * @version 1.0
- *
- * @author Mark Schmieder
- */
-package com.mhschmieder.jmath.statistics;
+package com.mhschmieder.jmath.geometry.euclidean;
+
+public enum Axis {
+    X, Y, Z;
+}

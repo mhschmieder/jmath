@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the JMath Library
+ * This file is part of the jmath Library
  *
- * You should have received a copy of the MIT License along with the
- * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
+ * You should have received a copy of the MIT License along with the jmath
+ * Library. If not, see <https://opensource.org/licenses/MIT>.
  *
  * Project: https://github.com/mhschmieder/jmath
  */
-package com.mhschmieder.jmath.geometry.euclidian;
+package com.mhschmieder.jmath.geometry.euclidean;
 
 import com.mhschmieder.jmath.MathUtilities;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -47,22 +47,19 @@ public class VectorUtilities {
     private VectorUtilities() {}
 
     public static Vector2D copyPoint2D( final Vector2D point2D ) {
-        final Vector2D copiedPoint2D = new Vector2D( point2D.getX(), point2D.getY() );
-        return copiedPoint2D;
+        return new Vector2D( point2D.getX(), point2D.getY() );
     }
 
     public static Vector3D copyPoint3D( final Vector3D point3D ) {
-        final Vector3D copiedPoint3D =
-                                     new Vector3D( point3D.getX(), point3D.getY(), point3D.getZ() );
-        return copiedPoint3D;
+        return new Vector3D( point3D.getX(), point3D.getY(), point3D.getZ() );
     }
 
     public static Vector2D negatePoint2D( final Vector2D point2D ) {
-        final Vector2D negatedPoint2D = new Vector2D( -point2D.getX(), -point2D.getY() );
-        return negatedPoint2D;
+        return new Vector2D( -point2D.getX(), -point2D.getY() );
     }
 
-    public static Vector2D negatePoint2D( final Vector2D point2D, final Axis axis ) {
+    public static Vector2D negatePoint2D( final Vector2D point2D,
+                                          final Axis axis ) {
         Vector2D negatedPoint = Vector2D.ZERO;
         
         switch ( axis ) {
@@ -83,24 +80,34 @@ public class VectorUtilities {
     }
 
     public static Vector3D negatePoint3D( final Vector3D point3D ) {
-        final Vector3D negatedPoint3D = new Vector3D( -point3D.getX(),
-                                                      -point3D.getY(),
-                                                      -point3D.getZ() );
-        return negatedPoint3D;
+        return new Vector3D(
+                -point3D.getX(),
+                -point3D.getY(),
+                -point3D.getZ() );
     }
 
-    public static Vector3D negatePoint3D( final Vector3D point3D, final Axis axis ) {
+    public static Vector3D negatePoint3D( final Vector3D point3D,
+                                          final Axis axis ) {
         Vector3D negatedPoint = Vector3D.ZERO;
         
         switch ( axis ) {
         case X:
-            negatedPoint = new Vector3D( -point3D.getX(), point3D.getY(), point3D.getZ() );
+            negatedPoint = new Vector3D(
+                    -point3D.getX(),
+                    point3D.getY(),
+                    point3D.getZ() );
             break;
         case Y:
-            negatedPoint = new Vector3D( point3D.getX(), -point3D.getY(), point3D.getZ() );
+            negatedPoint = new Vector3D(
+                    point3D.getX(),
+                    -point3D.getY(),
+                    point3D.getZ() );
             break;
         case Z:
-            negatedPoint = new Vector3D( point3D.getX(), point3D.getY(), -point3D.getZ() );
+            negatedPoint = new Vector3D(
+                    point3D.getX(),
+                    point3D.getY(),
+                    -point3D.getZ() );
             break;
         default:
             break;
@@ -109,19 +116,29 @@ public class VectorUtilities {
         return negatedPoint;
     }
 
-    public static Vector3D exchangeCoordinates( final Vector3D point3D,
-                                                final OrthogonalAxes orthogonalAxes ) {
+    public static Vector3D exchangeCoordinates(
+            final Vector3D point3D,
+            final OrthogonalAxes orthogonalAxes ) {
         Vector3D swappedPoint = Vector3D.ZERO;
         
         switch ( orthogonalAxes ) {
         case XY:
-            swappedPoint = new Vector3D( point3D.getY(), point3D.getX(), point3D.getZ() );
+            swappedPoint = new Vector3D(
+                    point3D.getY(),
+                    point3D.getX(),
+                    point3D.getZ() );
             break;
         case XZ:
-            swappedPoint = new Vector3D( point3D.getZ(), point3D.getY(), point3D.getX() );
+            swappedPoint = new Vector3D(
+                    point3D.getZ(),
+                    point3D.getY(),
+                    point3D.getX() );
             break;
         case YZ:
-            swappedPoint = new Vector3D( point3D.getX(), point3D.getZ(), point3D.getY() );
+            swappedPoint = new Vector3D(
+                    point3D.getX(),
+                    point3D.getZ(),
+                    point3D.getY() );
             break;
         default:
             break; 
@@ -169,7 +186,9 @@ public class VectorUtilities {
      *         specified point coordinate pair
      * @since 1.2
      */
-    public static double distance( final Vector2D pt, final double px, final double py ) {
+    public static double distance( final Vector2D pt,
+                                   final double px,
+                                   final double py ) {
         final double dx = px - pt.getX();
         final double dy = py - pt.getY();
         return FastMath.hypot( dx, dy );
@@ -187,7 +206,8 @@ public class VectorUtilities {
      *         another specified <code>Vector2D</code>.
      * @since 1.2
      */
-    public static double distance( final Vector2D pt1, final Vector2D pt2 ) {
+    public static double distance( final Vector2D pt1,
+                                   final Vector2D pt2 ) {
         return pt1.distance( pt2 );
     }
 
@@ -231,7 +251,9 @@ public class VectorUtilities {
      *         another specified point coordinate pair.
      * @since 1.2
      */
-    public static double distanceSq( final Vector2D point, final double px, final double py ) {
+    public static double distanceSq( final Vector2D point,
+                                     final double px,
+                                     final double py ) {
         final double dx = px - point.getX();
         final double dy = py - point.getY();
         return ( MathUtilities.sqr( dx ) + MathUtilities.sqr( dy ) );
@@ -299,7 +321,8 @@ public class VectorUtilities {
      *            supplied 2D point
      * @return The quadrant number for a supplied 2D point
      */
-    public static int getQuadrant( final Vector2D point, final Vector2D origin ) {
+    public static int getQuadrant( final Vector2D point,
+                                   final Vector2D origin ) {
         if ( point.getX() < origin.getX() ) {
             if ( point.getY() >= origin.getY() ) {
                 return 2;
@@ -323,7 +346,8 @@ public class VectorUtilities {
      *            supplied 3D point
      * @return The octant number for a supplied 3D point
      */
-    public static int getOctant( final Vector3D point, final Vector3D origin ) {
+    public static int getOctant( final Vector3D point,
+                                 final Vector3D origin ) {
         if ( point.getZ() < origin.getZ() ) {
             if ( point.getX() < origin.getX() ) {
                 if ( point.getY() >= origin.getY() ) {
@@ -348,8 +372,9 @@ public class VectorUtilities {
         return 4;
     }
 
-    public static Vector2D projectToPlane( final Vector3D point3D,
-                                           final OrthogonalAxes orthogonalAxes ) {
+    public static Vector2D projectToPlane(
+            final Vector3D point3D,
+            final OrthogonalAxes orthogonalAxes ) {
         // Project a 3D point to a plane defined by an orthogonal axis pair.
         Vector2D projectedPoint = Vector2D.ZERO;
         
@@ -372,7 +397,7 @@ public class VectorUtilities {
 
     public static Vector3D rotateInPlane( final Vector3D point3D,
                                           final OrthogonalAxes orthogonalAxes,
-                                          final double angleInRadians ) {
+                                          final double angleRadians ) {
         double axis1Value = 0.0d;
         double axis2Value = 0.0d;
     
@@ -393,23 +418,34 @@ public class VectorUtilities {
             break;
         }
     
-        final double axis1ValueRotated = ( axis1Value * FastMath.cos( angleInRadians ) )
-                - ( axis2Value * FastMath.sin( angleInRadians ) );
+        final double axis1ValueRotated = ( axis1Value * FastMath.cos(
+                angleRadians ) ) - ( axis2Value * FastMath.sin(
+                        angleRadians ) );
     
-        final double axis2ValueRotated = ( axis1Value * FastMath.sin( angleInRadians ) )
-                + ( axis2Value * FastMath.cos( angleInRadians ) );
+        final double axis2ValueRotated = ( axis1Value * FastMath.sin(
+                angleRadians ) ) + ( axis2Value * FastMath.cos(
+                        angleRadians ) );
     
         Vector3D rotatedPoint = Vector3D.ZERO;
         
         switch ( orthogonalAxes ) {
         case XY:
-            rotatedPoint = new Vector3D( axis1ValueRotated, axis2ValueRotated, 0.0d );
+            rotatedPoint = new Vector3D(
+                    axis1ValueRotated,
+                    axis2ValueRotated,
+                    0.0d );
             break;
         case XZ:
-            rotatedPoint = new Vector3D( axis1ValueRotated, 0.0d, axis2ValueRotated );
+            rotatedPoint = new Vector3D(
+                    axis1ValueRotated,
+                    0.0d,
+                    axis2ValueRotated );
             break;
         case YZ:
-            rotatedPoint = new Vector3D( 0.0d, axis1ValueRotated, axis2ValueRotated );
+            rotatedPoint = new Vector3D(
+                    0.0d,
+                    axis1ValueRotated,
+                    axis2ValueRotated );
             break;
         default:
             break;

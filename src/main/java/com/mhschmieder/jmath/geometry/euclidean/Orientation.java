@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the jgraphics Library
+ * This file is part of the jmath Library
  *
- * You should have received a copy of the MIT License along with the jgraphics
+ * You should have received a copy of the MIT License along with the jmath
  * Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/jgraphics
+ * Project: https://github.com/mhschmieder/jmath
  */
-package com.mhschmieder.jmath.geometry.euclidian;
+package com.mhschmieder.jmath.geometry.euclidean;
 
 import com.mhschmieder.jcommons.lang.Abbreviated;
 import com.mhschmieder.jcommons.lang.EnumUtilities;
@@ -37,21 +37,22 @@ import com.mhschmieder.jcommons.lang.Labeled;
 import java.util.Locale;
 
 /**
- * <code>FacingDirection</code> is an enumeration for facing direction values
- * relevant to three-dimensional objects in a two-dimensional projection plane.
- *
- * NOTE: Other than for Presentation String, this is now redundant with JavaFX.
+ * <code>Orientation</code> is an enumeration for conventional orientation
+ * values for graphical objects. For example, it may be relative to a plane
+ * cutting through an object's geometric center or COG.
+ * <p>
+ * NOTE: Other than for string conversions, this is now redundant with JavaFX.
  */
-public enum FacingDirection implements Labeled< FacingDirection >,
-        Abbreviated< FacingDirection > {
-    RIGHT( "Right", "r" ),
-    LEFT( "Left", "l" );
+public enum Orientation implements Labeled< Orientation >,
+        Abbreviated< Orientation > {
+    HORIZONTAL( "Horizontal", "hz" ),
+    VERTICAL( "Vertical", "vt" );
 
     private final String label;
     private final String abbreviation;
 
-    FacingDirection( final String pLabel,
-                     final String pAbbreviation ) {
+    Orientation( final String pLabel,
+                 final String pAbbreviation ) {
         label = pLabel;
         abbreviation = pAbbreviation;
     }
@@ -62,8 +63,8 @@ public enum FacingDirection implements Labeled< FacingDirection >,
     }
 
     @Override
-    public FacingDirection valueOfLabel( final String text ) {
-        return ( FacingDirection ) EnumUtilities.getLabeledEnumFromLabel(
+    public Orientation valueOfLabel( final String text ) {
+        return ( Orientation ) EnumUtilities.getLabeledEnumFromLabel(
                 text, values() );
     }
 
@@ -73,8 +74,9 @@ public enum FacingDirection implements Labeled< FacingDirection >,
     }
 
     @Override
-    public FacingDirection valueOfAbbreviation( final String abbreviatedText ) {
-        return ( FacingDirection ) EnumUtilities
+    public Orientation valueOfAbbreviation(
+            final String abbreviatedText ) {
+        return ( Orientation ) EnumUtilities
                 .getAbbreviatedEnumFromAbbreviation(
                         abbreviatedText, values() );
     }
@@ -87,14 +89,14 @@ public enum FacingDirection implements Labeled< FacingDirection >,
         return label();
     }
 
-    public static FacingDirection defaultValue() {
-        return RIGHT;
+    public static Orientation defaultValue() {
+        return HORIZONTAL;
     }
 
-    public static FacingDirection canonicalValueOf(
-            final String canonicalFacingDirection ) {
-        return ( canonicalFacingDirection != null )
-            ? valueOf( canonicalFacingDirection.toUpperCase( Locale.ENGLISH ) )
+    public static Orientation canonicalValueOf(
+            final String canonicalOrientation ) {
+        return ( canonicalOrientation != null )
+            ? valueOf( canonicalOrientation.toUpperCase( Locale.ENGLISH ) )
             : defaultValue();
     }
 

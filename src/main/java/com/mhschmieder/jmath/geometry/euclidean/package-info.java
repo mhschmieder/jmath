@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the JMath Library
+ * This file is part of the jmath Library
  *
- * You should have received a copy of the MIT License along with the
- * JMath Library. If not, see <https://opensource.org/licenses/MIT>.
+ * You should have received a copy of the MIT License along with the jmath
+ * Library. If not, see <https://opensource.org/licenses/MIT>.
  *
  * Project: https://github.com/mhschmieder/jmath
  */
 /**
- * This package contains the JMath Library's classes relating to
- * Euclidian Geometry, in most cases wrapping Apache Commons Math functionality.
+ * This package contains the jmath Library's classes relating to Euclidean
+ * Geometry, in most cases wrapping Apache Commons Math functionality.
  *
  * @version 1.0
  *
  * @author Mark Schmieder
  */
-package com.mhschmieder.jmath.geometry.euclidian;
+package com.mhschmieder.jmath.geometry.euclidean;

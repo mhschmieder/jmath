@@ -81,7 +81,9 @@ public final class MathUtilities {
      * @param max The maximum value in the range (inclusive)
      * @return The clamped int value, within the range
      */
-    public static int clamp( final int value, final int min, final int max ) {
+    public static int clamp( final int value,
+                             final int min,
+                             final int max ) {
         return FastMath.min(max, FastMath.max(min, value));
     }
 
@@ -98,8 +100,10 @@ public final class MathUtilities {
      * @param max The maximum value in the range (inclusive)
      * @return The clamped long value, within the range
      */
-    public static long clamp( final long value, final long min, final long max ) {
-        return FastMath.min(max, FastMath.max(min, value));
+    public static long clamp( final long value,
+                              final long min,
+                              final long max ) {
+        return FastMath.min( max, FastMath.max( min, value ) );
     }
 
     /**
@@ -115,8 +119,10 @@ public final class MathUtilities {
      * @param max The maximum value in the range (inclusive)
      * @return The clamped float value, within the range
      */
-    public static float clamp( final float value, final float min, final float max ) {
-        return FastMath.min(max, FastMath.max(min, value));
+    public static float clamp( final float value,
+                               final float min,
+                               final float max ) {
+        return FastMath.min( max, FastMath.max( min, value ) );
     }
 
     /**
@@ -132,8 +138,10 @@ public final class MathUtilities {
      * @param max The maximum value in the range (inclusive)
      * @return The clamped double value, within the range
      */
-    public static double clamp( final double value, final double min, final double max ) {
-        return FastMath.min(max, FastMath.max(min, value));
+    public static double clamp( final double value,
+                                final double min,
+                                final double max ) {
+        return FastMath.min( max, FastMath.max( min, value ) );
     }
 
     /**
@@ -161,8 +169,9 @@ public final class MathUtilities {
      * @return an angle in degrees that is normalized between centerAngleDegrees-180
      * degrees and 180-centerAngleDegrees
      */
-    public static double normalizeAngleDegrees( final double angleDegrees, 
-                                                final double centerAngleDegrees ) {
+    public static double normalizeAngleDegrees(
+            final double angleDegrees,
+            final double centerAngleDegrees ) {
         double normalizedAngleDegrees = angleDegrees;
 
         while ( normalizedAngleDegrees < centerAngleDegrees - 180.0d ) {
@@ -214,9 +223,10 @@ public final class MathUtilities {
      * @param maximumAngleDegrees the maximum angle to bound the period unwrapping
      * @return an angle in degrees that is unwrapped to be in a [ min, max ] range
      */
-    public static double unwrapAngleRangeDegrees( final double angleDegrees,
-                                                  final double minimumAngleDegrees,
-                                                  final double maximumAngleDegrees ) {
+    public static double unwrapAngleRangeDegrees(
+            final double angleDegrees,
+            final double minimumAngleDegrees,
+            final double maximumAngleDegrees ) {
         if ( ( maximumAngleDegrees - minimumAngleDegrees ) < 360.0d ) {
             return angleDegrees;
         }
@@ -297,7 +307,8 @@ public final class MathUtilities {
     public static int getNumberOfFractionalDigits( final double num ) {
         int numdigits = 0;
         double numAdjusted = num;
-        while ( ( numdigits <= 15 ) && ( numAdjusted != FastMath.floor( numAdjusted ) ) ) {
+        while ( ( numdigits <= 15 ) && ( numAdjusted != FastMath.floor(
+                numAdjusted ) ) ) {
             numAdjusted *= 10.0d;
             numdigits += 1;
         }
@@ -337,16 +348,16 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A float rounded to the specified decimal place
      */
-    public static float roundDecimal( final float number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
+    public static float roundDecimal( final float number,
+                                      final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
         // Use the classroom rounding method, not the one recommended by Apache
-        // Commons Math that is mostly relevant to USA based financial
+        // Commons Math that is mostly relevant to USA-based financial
         // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
-        final float numberRounded = roundDecimal( number,
-                                                  numberOfDecimalPlaces,
-                                                  RoundingMode.HALF_UP.ordinal() );
-
-        return numberRounded;
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.HALF_UP.ordinal() );
     }
 
     /**
@@ -358,16 +369,16 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A double rounded to the specified decimal place
      */
-    public static double roundDecimal( final double number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
+    public static double roundDecimal( final double number,
+                                       final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
         // Use the classroom rounding method, not the one recommended by Apache
-        // Commons Math that is mostly relevant to USA based financial
+        // Commons Math that is mostly relevant to USA-based financial
         // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
-        final double numberRounded = roundDecimal( number,
-                                                   numberOfDecimalPlaces,
-                                                   RoundingMode.HALF_UP.ordinal() );
-
-        return numberRounded;
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.HALF_UP.ordinal() );
     }
 
     /**
@@ -379,13 +390,13 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A float rounded up to the specified decimal place
      */
-    public static float roundUpDecimal( final float number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
-        final float numberRounded = roundDecimal( number,
-                                                  numberOfDecimalPlaces,
-                                                  RoundingMode.UP.ordinal() );
-
-        return numberRounded;
+    public static float roundUpDecimal( final float number,
+                                        final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.UP.ordinal() );
     }
 
     /**
@@ -397,13 +408,13 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A double rounded up to the specified decimal place
      */
-    public static double roundUpDecimal( final double number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
-        final double numberRounded = roundDecimal( number,
-                                                   numberOfDecimalPlaces,
-                                                   RoundingMode.UP.ordinal() );
-
-        return numberRounded;
+    public static double roundUpDecimal( final double number,
+                                         final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.UP.ordinal() );
     }
 
     /**
@@ -415,13 +426,13 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A float rounded down to the specified decimal place
      */
-    public static float roundDownDecimal( final float number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
-        final float numberRounded = roundDecimal( number,
-                                                  numberOfDecimalPlaces,
-                                                  RoundingMode.DOWN.ordinal() );
-
-        return numberRounded;
+    public static float roundDownDecimal( final float number,
+                                          final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.DOWN.ordinal() );
     }
 
     /**
@@ -433,13 +444,13 @@ public final class MathUtilities {
      *            The number of decimal places to preserve in rounding
      * @return A double rounded down to the specified decimal place
      */
-    public static double roundDownDecimal( final double number, final int numberOfDecimalPlaces )
-            throws IllegalArgumentException, NumberFormatException {
-        final double numberRounded = roundDecimal( number,
-                                                   numberOfDecimalPlaces,
-                                                   RoundingMode.DOWN.ordinal() );
-
-        return numberRounded;
+    public static double roundDownDecimal( final double number,
+                                           final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal(
+                number,
+                numberOfDecimalPlaces,
+                RoundingMode.DOWN.ordinal() );
     }
 
     /**
@@ -458,7 +469,7 @@ public final class MathUtilities {
     public static float roundDecimal( final float number,
                                       final int numberOfDecimalPlaces,
                                       int roundingMethod )
-            throws IllegalArgumentException, NumberFormatException {
+            throws IllegalArgumentException {
         // Number of digits after decimal point < 0, is invalid input, so return
         // the number unchanged.
         if ( numberOfDecimalPlaces < 0 ) {
@@ -468,11 +479,8 @@ public final class MathUtilities {
         // Use Apache Commons Math to do the rounding, which wraps FastMath with
         // safe edge case detection and handling for zero decimal places, etc.
         // TODO: Check Apache Commons Math Version 4 to see if anything replaces
-        // the removal of this method that was introduced in Version 3.
-        final float numberRounded =
-                                  Precision.round( number, numberOfDecimalPlaces, roundingMethod );
-
-        return numberRounded;
+        //  the removal of this method that was introduced in Version 3.
+        return Precision.round( number, numberOfDecimalPlaces, roundingMethod );
     }
 
     /**
@@ -491,7 +499,7 @@ public final class MathUtilities {
     public static double roundDecimal( final double number,
                                        final int numberOfDecimalPlaces,
                                        int roundingMethod )
-            throws IllegalArgumentException, NumberFormatException {
+            throws IllegalArgumentException {
         // Number of digits after decimal point < 0, is invalid input, so return
         // the number unchanged.
         if ( numberOfDecimalPlaces < 0 ) {
@@ -501,11 +509,8 @@ public final class MathUtilities {
         // Use Apache Commons Math to do the rounding, which wraps FastMath with
         // safe edge case detection and handling for zero decimal places, etc.
         // TODO: Check Apache Commons Math Version 4 to see if anything replaces
-        // the removal of this method that was introduced in Version 3.
-        final double numberRounded =
-                                   Precision.round( number, numberOfDecimalPlaces, roundingMethod );
-
-        return numberRounded;
+        //  the removal of this method that was introduced in Version 3.
+        return Precision.round( number, numberOfDecimalPlaces, roundingMethod );
     }
 
     /**
@@ -517,14 +522,13 @@ public final class MathUtilities {
      *            The multiplier to use for discretization
      * @return The nearest multiple of a given multiplier to a specified float
      */
-    public static float discretize( final float number, final float multiplier ) {
+    public static float discretize( final float number,
+                                    final float multiplier ) {
         if ( multiplier == 0.0f ) {
             return number;
         }
 
-        final float result = multiplier * FastMath.round( number / multiplier );
-
-        return result;
+        return multiplier * FastMath.round( number / multiplier );
     }
 
     /**
@@ -536,14 +540,13 @@ public final class MathUtilities {
      *            The multiplier to use for discretization
      * @return The nearest multiple of a given multiplier to a specified double
      */
-    public static double discretize( final double number, final double multiplier ) {
+    public static double discretize( final double number,
+                                     final double multiplier ) {
         if ( multiplier == 0.0d ) {
             return number;
         }
 
-        final double result = multiplier * FastMath.round( number / multiplier );
-
-        return result;
+        return multiplier * FastMath.round( number / multiplier );
     }
 
     /**
@@ -556,14 +559,14 @@ public final class MathUtilities {
      * @return The next highest multiple of a given multiplier to a specified
      *         float
      */
-    public static float discretizeUp( final float number, final float multiplier ) {
+    public static float discretizeUp( final float number,
+                                      final float multiplier ) {
         if ( multiplier == 0.0f ) {
             return number;
         }
 
-        final float result = ( float ) ( multiplier * FastMath.ceil( number / multiplier ) );
-
-        return result;
+        return ( float ) ( multiplier * FastMath.ceil(
+                number / multiplier ) );
     }
 
     /**
@@ -576,14 +579,13 @@ public final class MathUtilities {
      * @return The next highest multiple of a given multiplier to a specified
      *         double
      */
-    public static double discretizeUp( final double number, final double multiplier ) {
+    public static double discretizeUp( final double number,
+                                       final double multiplier ) {
         if ( multiplier == 0.0d ) {
             return number;
         }
 
-        final double result = multiplier * FastMath.ceil( number / multiplier );
-
-        return result;
+        return multiplier * FastMath.ceil( number / multiplier );
     }
 
     /**
@@ -596,14 +598,14 @@ public final class MathUtilities {
      * @return The next lowest multiple of a given multiplier to a specified
      *         float
      */
-    public static float discretizeDown( final float number, final float multiplier ) {
+    public static float discretizeDown( final float number,
+                                        final float multiplier ) {
         if ( multiplier == 0.0f ) {
             return number;
         }
 
-        final float result = ( float ) ( multiplier * FastMath.floor( number / multiplier ) );
-
-        return result;
+        return ( float ) ( multiplier * FastMath.floor(
+                number / multiplier ) );
     }
 
     /**
@@ -616,14 +618,13 @@ public final class MathUtilities {
      * @return The next lowest multiple of a given multiplier to a specified
      *         double
      */
-    public static double discretizeDown( final double number, final double multiplier ) {
+    public static double discretizeDown( final double number,
+                                         final double multiplier ) {
         if ( multiplier == 0.0d ) {
             return number;
         }
 
-        final double result = multiplier * FastMath.floor( number / multiplier );
-
-        return result;
+        return multiplier * FastMath.floor( number / multiplier );
     }
     
     /**
@@ -639,46 +640,60 @@ public final class MathUtilities {
         double discretizedStepSize = 0.0000000001d;
         
         if ( initialStepSize > 1000.0d ) {
-            discretizedStepSize = discretize( initialStepSize, 1000.0d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 1000.0d );
         }
         else if ( initialStepSize > 100.0d ) {
-            discretizedStepSize = discretize( initialStepSize, 100.0d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 100.0d );
         }
         else if ( initialStepSize > 10.0d ) {
-            discretizedStepSize = discretize( initialStepSize, 10.0d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 10.0d );
         }
         else if ( initialStepSize > 1.0d ) {
-            discretizedStepSize = discretize( initialStepSize, 1.0d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 1.0d );
         }
         else if ( initialStepSize > 0.1d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.1d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.1d );
         }
         else if ( initialStepSize > 0.01d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.01d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.01d );
         }
         else if ( initialStepSize > 0.001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.001d );
         }
         else if ( initialStepSize > 0.0001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.0001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.0001d );
         }
         else if ( initialStepSize > 0.00001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.00001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.00001d );
         }
         else if ( initialStepSize > 0.000001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.000001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.000001d );
         }
         else if ( initialStepSize > 0.0000001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.0000001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.0000001d );
         }
         else if ( initialStepSize > 0.00000001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.00000001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.00000001d );
         }
         else if ( initialStepSize > 0.000000001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.000000001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.000000001d );
         }
         else if ( initialStepSize > 0.0000000001d ) {
-            discretizedStepSize = discretize( initialStepSize, 0.0000000001d );
+            discretizedStepSize = discretize(
+                    initialStepSize, 0.0000000001d );
         }
         
         return discretizedStepSize;
@@ -778,8 +793,7 @@ public final class MathUtilities {
      *         {@link Complex}
      */
     public static Complex cloneComplex( final Complex z ) {
-        final Complex newComplex = new Complex( z.getReal(), z.getImaginary() );
-        return newComplex;
+        return new Complex( z.getReal(), z.getImaginary() );
     }
 
     /**
@@ -791,8 +805,9 @@ public final class MathUtilities {
      * @return <tt>Complex</tt> square z1 * z1
      */
     public static Complex sqrComplex( final Complex z ) {
-        return new Complex( sqr( z.getReal() ) - sqr( z.getImaginary() ),
-                            2.0d * ( z.getReal() * z.getImaginary() ) );
+        return new Complex(
+                sqr( z.getReal() ) - sqr( z.getImaginary() ),
+                2.0d * ( z.getReal() * z.getImaginary() ) );
     }
 
     /**
@@ -837,10 +852,11 @@ public final class MathUtilities {
      *         the <code>Complex</code> argument. (signed comparison).
      * @see java.lang.Comparable
      */
-    public static int compare( final Complex complex, final Complex anotherComplex ) {
+    public static int compare( final Complex complex,
+                               final Complex anotherComplex ) {
         final double thisVal = complex.abs();
         final double anotherVal = anotherComplex.abs();
 
-        return ( thisVal < anotherVal ? -1 : ( thisVal == anotherVal ? 0 : 1 ) );
+        return ( Double.compare( thisVal, anotherVal ) );
     }
 }
