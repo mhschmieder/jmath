@@ -626,7 +626,40 @@ public final class MathUtilities {
 
         return multiplier * FastMath.floor( number / multiplier );
     }
-    
+
+    /**
+     * Splits a double-precision floating-point number into fractional and
+     * integer parts, similar to C's modf.
+     * <p>
+     * Handles NaN, infinities, and signed zeros.
+     *
+     * @param value The number to split into fractional and integer parts
+     * @return ModfResult containing fractional and integer parts
+     */
+    public static ModfResult modf( final double value ) {
+        // Handle NaN and infinity directly.
+        if ( Double.isNaN( value ) ) {
+            return new ModfResult( Double.NaN, Double.NaN );
+        }
+        if ( Double.isInfinite( value ) ) {
+            return new ModfResult(
+                    FastMath.copySign(0.0d, value ), value );
+        }
+
+        // Extract the integer part using truncation toward zero.
+        double integerPart = ( value >= 0.0d )
+                ? Math.floor( value )
+                : Math.ceil(value);
+
+        // The fractional part preserves the sign of the original number.
+        double fractionalPart = value - integerPart;
+        if ( fractionalPart == 0.0d ) {
+            fractionalPart = FastMath.copySign( 0.0d, value );
+        }
+
+        return new ModfResult( fractionalPart, integerPart );
+    }
+
     /**
      * Returns a step size that is discretized according to the initial value's
      * nearest power of ten. This method is typically used for determining grid
