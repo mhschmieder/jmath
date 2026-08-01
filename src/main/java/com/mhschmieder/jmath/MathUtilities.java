@@ -75,7 +75,10 @@ public final class MathUtilities {
      * NOTE: This is a convenience method for higher performance than more
      *  generalized options such as Apache Commons Lang's Range class, which
      *  cause auto-boxing and unboxing, but there are other efficient choices.
-     * 
+     * <p>
+     * NOTE: This is now redundant as Java Math added clamping after Java 8. As
+     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     *
      * @param value The int value to clamp
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
@@ -84,7 +87,7 @@ public final class MathUtilities {
     public static int clamp( final int value,
                              final int min,
                              final int max ) {
-        return FastMath.min(max, FastMath.max(min, value));
+        return Math.clamp( value, min, max );
     }
 
     /**
@@ -94,7 +97,10 @@ public final class MathUtilities {
      * NOTE: This is a convenience method for higher performance than more
      *  generalized options such as Apache Commons Lang's Range class, which
      *  cause auto-boxing and unboxing, but there are other efficient choices.
-     * 
+     * <p>
+     * NOTE: This is now redundant as Java Math added clamping after Java 8. As
+     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     *
      * @param value The long value to clamp
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
@@ -103,7 +109,7 @@ public final class MathUtilities {
     public static long clamp( final long value,
                               final long min,
                               final long max ) {
-        return FastMath.min( max, FastMath.max( min, value ) );
+        return Math.clamp( value, min, max );
     }
 
     /**
@@ -113,7 +119,10 @@ public final class MathUtilities {
      * NOTE: This is a convenience method for higher performance than more
      *  generalized options such as Apache Commons Lang's Range class, which
      *  cause auto-boxing and unboxing, but there are other efficient choices.
-     * 
+     * <p>
+     * NOTE: This is now redundant as Java Math added clamping after Java 8. As
+     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     *
      * @param value The float value to clamp
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
@@ -122,7 +131,7 @@ public final class MathUtilities {
     public static float clamp( final float value,
                                final float min,
                                final float max ) {
-        return FastMath.min( max, FastMath.max( min, value ) );
+        return Math.clamp( value, min, max );
     }
 
     /**
@@ -132,7 +141,10 @@ public final class MathUtilities {
      * NOTE: This is a convenience method for higher performance than more
      *  generalized options such as Apache Commons Lang's Range class, which
      *  cause auto-boxing and unboxing, but there are other efficient choices.
-     * 
+     * <p>
+     * NOTE: This is now redundant as Java Math added clamping after Java 8. As
+     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     *
      * @param value The double value to clamp
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
@@ -141,7 +153,7 @@ public final class MathUtilities {
     public static double clamp( final double value,
                                 final double min,
                                 final double max ) {
-        return FastMath.min( max, FastMath.max( min, value ) );
+        return Math.clamp( value, min, max );
     }
 
     /**
