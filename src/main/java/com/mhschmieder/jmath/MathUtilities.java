@@ -83,7 +83,10 @@ public final class MathUtilities {
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
      * @return The clamped int value, within the range
+     * @deprecated This method is no longer recommended as it is now redundant.
+     *             Use {@link Math#clamp} instead.
      */
+    @Deprecated
     public static int clamp( final int value,
                              final int min,
                              final int max ) {
@@ -105,7 +108,10 @@ public final class MathUtilities {
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
      * @return The clamped long value, within the range
+     * @deprecated This method is no longer recommended as it is now redundant.
+     *             Use {@link Math#clamp} instead.
      */
+    @Deprecated
     public static long clamp( final long value,
                               final long min,
                               final long max ) {
@@ -127,7 +133,10 @@ public final class MathUtilities {
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
      * @return The clamped float value, within the range
+     * @deprecated This method is no longer recommended as it is now redundant.
+     *             Use {@link Math#clamp} instead.
      */
+    @Deprecated
     public static float clamp( final float value,
                                final float min,
                                final float max ) {
@@ -149,7 +158,10 @@ public final class MathUtilities {
      * @param min The minimum value in the range (inclusive)
      * @param max The maximum value in the range (inclusive)
      * @return The clamped double value, within the range
+     * @deprecated This method is no longer recommended as it is now redundant.
+     *             Use {@link Math#clamp} instead.
      */
+    @Deprecated
     public static double clamp( final double value,
                                 final double min,
                                 final double max ) {
