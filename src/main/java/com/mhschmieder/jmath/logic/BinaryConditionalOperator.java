@@ -43,11 +43,11 @@ import com.mhschmieder.jcommons.lang.Labeled;
  * predates the addition of Java Generics.
  * <p>
  * NOTE: The verbose class name is necessary as Java has a functional interface
- *  called "BinaryOperator" which is for logical vs. conditional binary.
+ * called "BinaryOperator" which is for logical vs. conditional binary.
  */
 public enum BinaryConditionalOperator
         implements Indexed< BinaryConditionalOperator >,
-        Labeled< BinaryConditionalOperator > {
+                   Labeled< BinaryConditionalOperator > {
     NONE( 0, "Ignore" ),
     AND( 1, "AND" ),
     OR( 2, "OR" );
@@ -61,6 +61,10 @@ public enum BinaryConditionalOperator
         label = pLabel;
     }
 
+    public static BinaryConditionalOperator defaultValue() {
+        return NONE;
+    }
+
     @Override
     public int index() {
         return index;
@@ -68,8 +72,17 @@ public enum BinaryConditionalOperator
 
     @Override
     public BinaryConditionalOperator valueOfIndex( final int pIndex ) {
-        return ( BinaryConditionalOperator ) EnumUtilities
-                .getIndexedEnumFromIndex( pIndex, values() );
+        return ( BinaryConditionalOperator ) EnumUtilities.getIndexedEnumFromIndex(
+                pIndex,
+                values() );
+    }
+
+    @Override
+    public String toString() {
+        // NOTE: This override takes care of displaying the current choice in
+        //  its custom label form when a Combo Box is hosted by a Table Cell. It
+        //  also addresses an issue with the Jackson parser if in a JSON file.
+        return label();
     }
 
     @Override
@@ -79,19 +92,8 @@ public enum BinaryConditionalOperator
 
     @Override
     public BinaryConditionalOperator valueOfLabel( final String text ) {
-        return ( BinaryConditionalOperator ) EnumUtilities
-                .getLabeledEnumFromLabel( text, values() );
-    }
-
-    public static BinaryConditionalOperator defaultValue() {
-        return NONE;
-    }
-
-    @Override
-    public String toString() {
-        // NOTE: This override takes care of displaying the current choice in
-        //  its custom label form when a Combo Box is hosted by a Table Cell. It
-        //  also addresses an issue with the Jackson parser if in a JSON file.
-        return label();
+        return ( BinaryConditionalOperator ) EnumUtilities.getLabeledEnumFromLabel(
+                text,
+                values() );
     }
 }

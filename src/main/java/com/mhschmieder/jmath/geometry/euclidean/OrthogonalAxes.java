@@ -31,5 +31,7 @@
 package com.mhschmieder.jmath.geometry.euclidean;
 
 public enum OrthogonalAxes {
-    XY, XZ, YZ;
+    XY,
+    XZ,
+    YZ;
 }

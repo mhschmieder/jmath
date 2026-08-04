@@ -38,8 +38,8 @@ import com.mhschmieder.jcommons.lang.Labeled;
  * Enumeration of choices for Random Number seeds, as this may grow beyond a
  * simple binary choice of using the same seed each time vs. a variable seed.
  */
-public enum RandomNumberSeed implements Indexed< RandomNumberSeed >,
-        Labeled< RandomNumberSeed > {
+public enum RandomNumberSeed
+        implements Indexed< RandomNumberSeed >, Labeled< RandomNumberSeed > {
     CONSTANT( 0, "Always the Same" ),
     VARIABLE( 1, "Each Run is Different" );
 
@@ -52,6 +52,10 @@ public enum RandomNumberSeed implements Indexed< RandomNumberSeed >,
         label = pLabel;
     }
 
+    public static RandomNumberSeed defaultValue() {
+        return CONSTANT;
+    }
+
     @Override
     public int index() {
         return index;
@@ -60,7 +64,16 @@ public enum RandomNumberSeed implements Indexed< RandomNumberSeed >,
     @Override
     public RandomNumberSeed valueOfIndex( final int pIndex ) {
         return ( RandomNumberSeed ) EnumUtilities.getIndexedEnumFromIndex(
-                pIndex, values() );
+                pIndex,
+                values() );
+    }
+
+    @Override
+    public String toString() {
+        // NOTE: This override takes care of displaying the current choice in
+        //  its custom label form when a Combo Box is hosted by a Table Cell. It
+        //  also addresses an issue with the Jackson parser if in a JSON file.
+        return label();
     }
 
     @Override
@@ -70,19 +83,7 @@ public enum RandomNumberSeed implements Indexed< RandomNumberSeed >,
 
     @Override
     public RandomNumberSeed valueOfLabel( final String text ) {
-        return ( RandomNumberSeed ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
-    }
-
-    public static RandomNumberSeed defaultValue() {
-        return CONSTANT;
-    }
-
-    @Override
-    public String toString() {
-        // NOTE: This override takes care of displaying the current choice in
-        //  its custom label form when a Combo Box is hosted by a Table Cell. It
-        //  also addresses an issue with the Jackson parser if in a JSON file.
-        return label();
+        return ( RandomNumberSeed ) EnumUtilities.getLabeledEnumFromLabel( text,
+                                                                           values() );
     }
 }

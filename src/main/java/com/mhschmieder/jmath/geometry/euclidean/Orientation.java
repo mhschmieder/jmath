@@ -43,8 +43,8 @@ import java.util.Locale;
  * <p>
  * NOTE: Other than for string conversions, this is now redundant with JavaFX.
  */
-public enum Orientation implements Labeled< Orientation >,
-        Abbreviated< Orientation > {
+public enum Orientation
+        implements Labeled< Orientation >, Abbreviated< Orientation > {
     HORIZONTAL( "Horizontal", "hz" ),
     VERTICAL( "Vertical", "vt" );
 
@@ -57,15 +57,14 @@ public enum Orientation implements Labeled< Orientation >,
         abbreviation = pAbbreviation;
     }
 
-    @Override
-    public String label() {
-        return label;
+    public static Orientation canonicalValueOf( final String canonicalOrientation ) {
+        return ( canonicalOrientation != null )
+               ? valueOf( canonicalOrientation.toUpperCase( Locale.ENGLISH ) )
+               : defaultValue();
     }
 
-    @Override
-    public Orientation valueOfLabel( final String text ) {
-        return ( Orientation ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
+    public static Orientation defaultValue() {
+        return HORIZONTAL;
     }
 
     @Override
@@ -74,11 +73,14 @@ public enum Orientation implements Labeled< Orientation >,
     }
 
     @Override
-    public Orientation valueOfAbbreviation(
-            final String abbreviatedText ) {
-        return ( Orientation ) EnumUtilities
-                .getAbbreviatedEnumFromAbbreviation(
-                        abbreviatedText, values() );
+    public Orientation valueOfAbbreviation( final String abbreviatedText ) {
+        return ( Orientation ) EnumUtilities.getAbbreviatedEnumFromAbbreviation(
+                abbreviatedText,
+                values() );
+    }
+
+    public final String toCanonicalString() {
+        return toString().toLowerCase( Locale.ENGLISH );
     }
 
     @Override
@@ -89,18 +91,14 @@ public enum Orientation implements Labeled< Orientation >,
         return label();
     }
 
-    public static Orientation defaultValue() {
-        return HORIZONTAL;
+    @Override
+    public String label() {
+        return label;
     }
 
-    public static Orientation canonicalValueOf(
-            final String canonicalOrientation ) {
-        return ( canonicalOrientation != null )
-            ? valueOf( canonicalOrientation.toUpperCase( Locale.ENGLISH ) )
-            : defaultValue();
-    }
-
-    public final String toCanonicalString() {
-        return toString().toLowerCase( Locale.ENGLISH );
+    @Override
+    public Orientation valueOfLabel( final String text ) {
+        return ( Orientation ) EnumUtilities.getLabeledEnumFromLabel( text,
+                                                                      values() );
     }
 }

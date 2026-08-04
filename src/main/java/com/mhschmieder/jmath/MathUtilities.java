@@ -48,16 +48,10 @@ import java.math.RoundingMode;
 public final class MathUtilities {
 
     /**
-     * The default constructor is disabled, as this is a static utilities class.
-     */
-    private MathUtilities() {}
-
-    /**
      * Random seed array to use for consistent results on repeat uses of any
      * available distribution model. Reset if repeatable sequence isn't wanted.
      */
     public static int[] randomSeeds;
-
     /**
      * Reference for random number provider, to make sure there is only one
      * instance each time an application that uses this class is invoked.
@@ -69,22 +63,29 @@ public final class MathUtilities {
     private static UniformRandomProvider randomProvider = null;
 
     /**
+     * The default constructor is disabled, as this is a static utilities
+     * class.
+     */
+    private MathUtilities() {
+    }
+
+    /**
      * Returns the int value clamped within the inclusive range defined by
      * <code>min</code> and <code>max</code>.
      * <p>
      * NOTE: This is a convenience method for higher performance than more
-     *  generalized options such as Apache Commons Lang's Range class, which
-     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * generalized options such as Apache Commons Lang's Range class, which
+     * cause auto-boxing and unboxing, but there are other efficient choices.
      * <p>
      * NOTE: This is now redundant as Java Math added clamping after Java 8. As
-     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     * a result, we now call that method vs. wrapping Apache Commons FastMath.
      *
      * @param value The int value to clamp
-     * @param min The minimum value in the range (inclusive)
-     * @param max The maximum value in the range (inclusive)
+     * @param min   The minimum value in the range (inclusive)
+     * @param max   The maximum value in the range (inclusive)
      * @return The clamped int value, within the range
      * @deprecated This method is no longer recommended as it is now redundant.
-     *             Use {@link Math#clamp} instead.
+     *         Use {@link Math#clamp} instead.
      */
     @Deprecated
     public static int clamp( final int value,
@@ -98,18 +99,18 @@ public final class MathUtilities {
      * <code>min</code> and <code>max</code>.
      * <p>
      * NOTE: This is a convenience method for higher performance than more
-     *  generalized options such as Apache Commons Lang's Range class, which
-     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * generalized options such as Apache Commons Lang's Range class, which
+     * cause auto-boxing and unboxing, but there are other efficient choices.
      * <p>
      * NOTE: This is now redundant as Java Math added clamping after Java 8. As
-     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     * a result, we now call that method vs. wrapping Apache Commons FastMath.
      *
      * @param value The long value to clamp
-     * @param min The minimum value in the range (inclusive)
-     * @param max The maximum value in the range (inclusive)
+     * @param min   The minimum value in the range (inclusive)
+     * @param max   The maximum value in the range (inclusive)
      * @return The clamped long value, within the range
      * @deprecated This method is no longer recommended as it is now redundant.
-     *             Use {@link Math#clamp} instead.
+     *         Use {@link Math#clamp} instead.
      */
     @Deprecated
     public static long clamp( final long value,
@@ -123,18 +124,18 @@ public final class MathUtilities {
      * <code>min</code> and <code>max</code>.
      * <p>
      * NOTE: This is a convenience method for higher performance than more
-     *  generalized options such as Apache Commons Lang's Range class, which
-     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * generalized options such as Apache Commons Lang's Range class, which
+     * cause auto-boxing and unboxing, but there are other efficient choices.
      * <p>
      * NOTE: This is now redundant as Java Math added clamping after Java 8. As
-     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     * a result, we now call that method vs. wrapping Apache Commons FastMath.
      *
      * @param value The float value to clamp
-     * @param min The minimum value in the range (inclusive)
-     * @param max The maximum value in the range (inclusive)
+     * @param min   The minimum value in the range (inclusive)
+     * @param max   The maximum value in the range (inclusive)
      * @return The clamped float value, within the range
      * @deprecated This method is no longer recommended as it is now redundant.
-     *             Use {@link Math#clamp} instead.
+     *         Use {@link Math#clamp} instead.
      */
     @Deprecated
     public static float clamp( final float value,
@@ -148,18 +149,18 @@ public final class MathUtilities {
      * <code>min</code> and <code>max</code>.
      * <p>
      * NOTE: This is a convenience method for higher performance than more
-     *  generalized options such as Apache Commons Lang's Range class, which
-     *  cause auto-boxing and unboxing, but there are other efficient choices.
+     * generalized options such as Apache Commons Lang's Range class, which
+     * cause auto-boxing and unboxing, but there are other efficient choices.
      * <p>
      * NOTE: This is now redundant as Java Math added clamping after Java 8. As
-     *  a result, we now call that method vs. wrapping Apache Commons FastMath.
+     * a result, we now call that method vs. wrapping Apache Commons FastMath.
      *
      * @param value The double value to clamp
-     * @param min The minimum value in the range (inclusive)
-     * @param max The maximum value in the range (inclusive)
+     * @param min   The minimum value in the range (inclusive)
+     * @param max   The maximum value in the range (inclusive)
      * @return The clamped double value, within the range
      * @deprecated This method is no longer recommended as it is now redundant.
-     *             Use {@link Math#clamp} instead.
+     *         Use {@link Math#clamp} instead.
      */
     @Deprecated
     public static double clamp( final double value,
@@ -169,10 +170,13 @@ public final class MathUtilities {
     }
 
     /**
-     * Flip an angle to its opposite compass value, and unwrap the resulting value.
+     * Flip an angle to its opposite compass value, and unwrap the resulting
+     * value.
      * <p>
+     *
      * @param angleDegrees angle to flip
-     * @return an angle in degrees that is flipped to its opposite compass value
+     * @return an angle in degrees that is flipped to its opposite compass
+     *         value
      */
     public static double flipAngleDegrees( final double angleDegrees ) {
         double flippedAngleDegrees = angleDegrees - 180.0d;
@@ -181,44 +185,17 @@ public final class MathUtilities {
     }
 
     /**
-     * Normalize an angle in a 2&pi; wide interval around a center value.
+     * Unwraps an angle to just within the inclusive-exclusive range of [ 0, 360
+     * ) degrees. A typical use is to avoid the potential ambiguity of both zero
+     * and 360 degrees showing up in a coordinate set. Also use this to unwrap
+     * period.
      * <p>
-     * This method is needed when calculations are to stay in degrees other than
-     * radians; if in radians, use Apache Commons Math normalizeAngle().
-     * <p>
-     * A typical use is to unwrap phase, by passing zero as the center angle.
-     * 
-     * @param angleDegrees angle to normalize
-     * @param centerAngleDegrees center of the desired 2&pi; interval for the result
-     * @return an angle in degrees that is normalized between centerAngleDegrees-180
-     * degrees and 180-centerAngleDegrees
-     */
-    public static double normalizeAngleDegrees(
-            final double angleDegrees,
-            final double centerAngleDegrees ) {
-        double normalizedAngleDegrees = angleDegrees;
-
-        while ( normalizedAngleDegrees < centerAngleDegrees - 180.0d ) {
-            normalizedAngleDegrees += 360.0d;
-        }
-
-        while ( normalizedAngleDegrees > 180.0d - centerAngleDegrees ) {
-            normalizedAngleDegrees -= 360.0d;
-        }
-
-        return normalizedAngleDegrees;
-    }
-
-    /**
-     * Unwraps an angle to just within the inclusive-exclusive range of [ 0, 360 )
-     * degrees. A typical use is to avoid the potential ambiguity of both zero and
-     * 360 degrees showing up in a coordinate set. Also use this to unwrap period.
-     * <p>
-     * This method's results cannot be achieved using normalizeAngleDegrees() as we
-     * could end up unnecessarily adding 360 degrees to all positive angles.
-     * 
+     * This method's results cannot be achieved using normalizeAngleDegrees() as
+     * we could end up unnecessarily adding 360 degrees to all positive angles.
+     *
      * @param angleDegrees angle to unwrap
-     * @return an angle in degrees that is unwrapped to be in the [ 0, 360 ) range
+     * @return an angle in degrees that is unwrapped to be in the [ 0, 360 )
+     *         range
      */
     public static double unwrapAngleDegrees( final double angleDegrees ) {
         double unwrappedAngleDegrees = angleDegrees;
@@ -235,29 +212,61 @@ public final class MathUtilities {
     }
 
     /**
-     * Unwraps an angle to a specified range, as long as that range is at least a
-     * full period (360 degrees). This is not the same as the standard unwrap 
+     * Normalize an angle in a 2&pi; wide interval around a center value.
+     * <p>
+     * This method is needed when calculations are to stay in degrees other than
+     * radians; if in radians, use Apache Commons Math normalizeAngle().
+     * <p>
+     * A typical use is to unwrap phase, by passing zero as the center angle.
+     *
+     * @param angleDegrees       angle to normalize
+     * @param centerAngleDegrees center of the desired 2&pi; interval for the
+     *                           result
+     * @return an angle in degrees that is normalized between
+     *         centerAngleDegrees-180 degrees and 180-centerAngleDegrees
+     */
+    public static double normalizeAngleDegrees( final double angleDegrees,
+                                                final double centerAngleDegrees ) {
+        double normalizedAngleDegrees = angleDegrees;
+
+        while ( normalizedAngleDegrees < centerAngleDegrees - 180.0d ) {
+            normalizedAngleDegrees += 360.0d;
+        }
+
+        while ( normalizedAngleDegrees > 180.0d - centerAngleDegrees ) {
+            normalizedAngleDegrees -= 360.0d;
+        }
+
+        return normalizedAngleDegrees;
+    }
+
+    /**
+     * Unwraps an angle to a specified range, as long as that range is at least
+     * a full period (360 degrees). This is not the same as the standard unwrap
      * method as it isn't bound to [0, 360 ) and can include the maximum angle.
      * <p>
      * This method is most useful as enforcer of clamping and conversion or
-     * normalization of user entered values in a GUI text editor or angle slider.
-     * 
-     * @param angleDegrees angle to unwrap
-     * @param minimumAngleDegrees the minimum angle to bound the period unwrapping
-     * @param maximumAngleDegrees the maximum angle to bound the period unwrapping
-     * @return an angle in degrees that is unwrapped to be in a [ min, max ] range
+     * normalization of user entered values in a GUI text editor or angle
+     * slider.
+     *
+     * @param angleDegrees        angle to unwrap
+     * @param minimumAngleDegrees the minimum angle to bound the period
+     *                            unwrapping
+     * @param maximumAngleDegrees the maximum angle to bound the period
+     *                            unwrapping
+     * @return an angle in degrees that is unwrapped to be in a [ min, max ]
+     *         range
      */
-    public static double unwrapAngleRangeDegrees(
-            final double angleDegrees,
-            final double minimumAngleDegrees,
-            final double maximumAngleDegrees ) {
+    public static double unwrapAngleRangeDegrees( final double angleDegrees,
+                                                  final double minimumAngleDegrees,
+                                                  final double maximumAngleDegrees ) {
         if ( ( maximumAngleDegrees - minimumAngleDegrees ) < 360.0d ) {
             return angleDegrees;
         }
 
         double unwrappedAngleDegrees = angleDegrees;
-        
-        while ( unwrappedAngleDegrees < minimumAngleDegrees) {
+
+        while ( unwrappedAngleDegrees < minimumAngleDegrees ) {
             unwrappedAngleDegrees += 360.0d;
         }
 
@@ -267,7 +276,7 @@ public final class MathUtilities {
 
         return unwrappedAngleDegrees;
     }
-    
+
     // Trigonometric functions.
     public static double sec( final double x ) {
         // NOTE: Using home-grown NumberUtilities check for finite number for
@@ -322,7 +331,9 @@ public final class MathUtilities {
 
     // Return the function sinc(x), where sinc(x) is defined as sin(x) / x.
     public static double sinc( final double x ) {
-        return ( FastMath.abs( x ) < 1.0e-30 ) ? 1.0d : FastMath.sin( x ) / x;
+        return ( FastMath.abs( x ) < 1.0e-30 )
+               ? 1.0d
+               : FastMath.sin( x ) / x;
     }
 
     // Return the number of fractional digits required to display the given
@@ -365,11 +376,10 @@ public final class MathUtilities {
 
     /**
      * Rounds a float to the specified number of decimal places.
-     * 
-     * @param number
-     *            The float to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
+     *
+     * @param number                The float to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
      * @return A float rounded to the specified decimal place
      */
     public static float roundDecimal( final float number,
@@ -378,115 +388,20 @@ public final class MathUtilities {
         // Use the classroom rounding method, not the one recommended by Apache
         // Commons Math that is mostly relevant to USA-based financial
         // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.HALF_UP.ordinal() );
-    }
-
-    /**
-     * Rounds a double to the specified number of decimal places.
-     * 
-     * @param number
-     *            The double to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @return A double rounded to the specified decimal place
-     */
-    public static double roundDecimal( final double number,
-                                       final int numberOfDecimalPlaces )
-            throws IllegalArgumentException {
-        // Use the classroom rounding method, not the one recommended by Apache
-        // Commons Math that is mostly relevant to USA-based financial
-        // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.HALF_UP.ordinal() );
-    }
-
-    /**
-     * Rounds up a float to the specified number of decimal places.
-     * 
-     * @param number
-     *            The float to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @return A float rounded up to the specified decimal place
-     */
-    public static float roundUpDecimal( final float number,
-                                        final int numberOfDecimalPlaces )
-            throws IllegalArgumentException {
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.UP.ordinal() );
-    }
-
-    /**
-     * Rounds up a double to the specified number of decimal places.
-     * 
-     * @param number
-     *            The double to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @return A double rounded up to the specified decimal place
-     */
-    public static double roundUpDecimal( final double number,
-                                         final int numberOfDecimalPlaces )
-            throws IllegalArgumentException {
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.UP.ordinal() );
-    }
-
-    /**
-     * Rounds down a float to the specified number of decimal places.
-     * 
-     * @param number
-     *            The float to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @return A float rounded down to the specified decimal place
-     */
-    public static float roundDownDecimal( final float number,
-                                          final int numberOfDecimalPlaces )
-            throws IllegalArgumentException {
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.DOWN.ordinal() );
-    }
-
-    /**
-     * Rounds down a double to the specified number of decimal places.
-     * 
-     * @param number
-     *            The double to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @return A double rounded down to the specified decimal place
-     */
-    public static double roundDownDecimal( final double number,
-                                           final int numberOfDecimalPlaces )
-            throws IllegalArgumentException {
-        return roundDecimal(
-                number,
-                numberOfDecimalPlaces,
-                RoundingMode.DOWN.ordinal() );
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.HALF_UP.ordinal() );
     }
 
     /**
      * Rounds a float to the specified number of decimal places given a provided
      * rounding method.
-     * 
-     * @param number
-     *            The float to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @param roundingMethod
-     *            The rounding method to use, compatible with BigDecimal
+     *
+     * @param number                The float to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @param roundingMethod        The rounding method to use, compatible with
+     *                              BigDecimal
      * @return A float rounded to the specified decimal place with specific
      *         rounding
      */
@@ -508,15 +423,33 @@ public final class MathUtilities {
     }
 
     /**
+     * Rounds a double to the specified number of decimal places.
+     *
+     * @param number                The double to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @return A double rounded to the specified decimal place
+     */
+    public static double roundDecimal( final double number,
+                                       final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        // Use the classroom rounding method, not the one recommended by Apache
+        // Commons Math that is mostly relevant to USA-based financial
+        // institutions (specifically, ROUND_EVEN from Java RoundingMode enum).
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.HALF_UP.ordinal() );
+    }
+
+    /**
      * Rounds a double to the specified number of decimal places given a
      * provided rounding method.
-     * 
-     * @param number
-     *            The double to be rounded
-     * @param numberOfDecimalPlaces
-     *            The number of decimal places to preserve in rounding
-     * @param roundingMethod
-     *            The rounding method to use, compatible with BigDecimal
+     *
+     * @param number                The double to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @param roundingMethod        The rounding method to use, compatible with
+     *                              BigDecimal
      * @return A double rounded to the specified decimal place with specific
      *         rounding
      */
@@ -538,12 +471,74 @@ public final class MathUtilities {
     }
 
     /**
+     * Rounds up a float to the specified number of decimal places.
+     *
+     * @param number                The float to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @return A float rounded up to the specified decimal place
+     */
+    public static float roundUpDecimal( final float number,
+                                        final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.UP.ordinal() );
+    }
+
+    /**
+     * Rounds up a double to the specified number of decimal places.
+     *
+     * @param number                The double to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @return A double rounded up to the specified decimal place
+     */
+    public static double roundUpDecimal( final double number,
+                                         final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.UP.ordinal() );
+    }
+
+    /**
+     * Rounds down a float to the specified number of decimal places.
+     *
+     * @param number                The float to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @return A float rounded down to the specified decimal place
+     */
+    public static float roundDownDecimal( final float number,
+                                          final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.DOWN.ordinal() );
+    }
+
+    /**
+     * Rounds down a double to the specified number of decimal places.
+     *
+     * @param number                The double to be rounded
+     * @param numberOfDecimalPlaces The number of decimal places to preserve in
+     *                              rounding
+     * @return A double rounded down to the specified decimal place
+     */
+    public static double roundDownDecimal( final double number,
+                                           final int numberOfDecimalPlaces )
+            throws IllegalArgumentException {
+        return roundDecimal( number,
+                             numberOfDecimalPlaces,
+                             RoundingMode.DOWN.ordinal() );
+    }
+
+    /**
      * Discretizes a float to the nearest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The float to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
+     *
+     * @param number     The float to be discretized
+     * @param multiplier The multiplier to use for discretization
      * @return The nearest multiple of a given multiplier to a specified float
      */
     public static float discretize( final float number,
@@ -556,30 +551,10 @@ public final class MathUtilities {
     }
 
     /**
-     * Discretizes a double to the nearest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The double to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
-     * @return The nearest multiple of a given multiplier to a specified double
-     */
-    public static double discretize( final double number,
-                                     final double multiplier ) {
-        if ( multiplier == 0.0d ) {
-            return number;
-        }
-
-        return multiplier * FastMath.round( number / multiplier );
-    }
-
-    /**
      * Discretizes a float to the next highest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The float to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
+     *
+     * @param number     The float to be discretized
+     * @param multiplier The multiplier to use for discretization
      * @return The next highest multiple of a given multiplier to a specified
      *         float
      */
@@ -589,17 +564,14 @@ public final class MathUtilities {
             return number;
         }
 
-        return ( float ) ( multiplier * FastMath.ceil(
-                number / multiplier ) );
+        return ( float ) ( multiplier * FastMath.ceil( number / multiplier ) );
     }
 
     /**
      * Discretizes a double to the next highest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The double to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
+     *
+     * @param number     The double to be discretized
+     * @param multiplier The multiplier to use for discretization
      * @return The next highest multiple of a given multiplier to a specified
      *         double
      */
@@ -614,11 +586,9 @@ public final class MathUtilities {
 
     /**
      * Discretizes a float to the next lowest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The float to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
+     *
+     * @param number     The float to be discretized
+     * @param multiplier The multiplier to use for discretization
      * @return The next lowest multiple of a given multiplier to a specified
      *         float
      */
@@ -628,17 +598,14 @@ public final class MathUtilities {
             return number;
         }
 
-        return ( float ) ( multiplier * FastMath.floor(
-                number / multiplier ) );
+        return ( float ) ( multiplier * FastMath.floor( number / multiplier ) );
     }
 
     /**
      * Discretizes a double to the next lowest multiple of a given multiplier.
-     * 
-     * @param number
-     *            The double to be discretized
-     * @param multiplier
-     *            The multiplier to use for discretization
+     *
+     * @param number     The double to be discretized
+     * @param multiplier The multiplier to use for discretization
      * @return The next lowest multiple of a given multiplier to a specified
      *         double
      */
@@ -666,14 +633,13 @@ public final class MathUtilities {
             return new ModfResult( Double.NaN, Double.NaN );
         }
         if ( Double.isInfinite( value ) ) {
-            return new ModfResult(
-                    FastMath.copySign(0.0d, value ), value );
+            return new ModfResult( FastMath.copySign( 0.0d, value ), value );
         }
 
         // Extract the integer part using truncation toward zero.
         double integerPart = ( value >= 0.0d )
-                ? Math.floor( value )
-                : Math.ceil(value);
+                             ? Math.floor( value )
+                             : Math.ceil( value );
 
         // The fractional part preserves the sign of the original number.
         double fractionalPart = value - integerPart;
@@ -688,77 +654,80 @@ public final class MathUtilities {
      * Returns a step size that is discretized according to the initial value's
      * nearest power of ten. This method is typically used for determining grid
      * line resolution for views and charts. It is a bit of a placeholder hack.
-     * 
-     * @param initialStepSize The initial non-discretized step size to discretize
-     * @return A step size that is discretized according to an initial value's 
-     * nearest power of ten
+     *
+     * @param initialStepSize The initial non-discretized step size to
+     *                        discretize
+     * @return A step size that is discretized according to an initial value's
+     *         nearest power of ten
      */
     public static double getDecimalStepSize( final double initialStepSize ) {
         double discretizedStepSize = 0.0000000001d;
-        
+
         if ( initialStepSize > 1000.0d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 1000.0d );
+            discretizedStepSize = discretize( initialStepSize, 1000.0d );
         }
         else if ( initialStepSize > 100.0d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 100.0d );
+            discretizedStepSize = discretize( initialStepSize, 100.0d );
         }
         else if ( initialStepSize > 10.0d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 10.0d );
+            discretizedStepSize = discretize( initialStepSize, 10.0d );
         }
         else if ( initialStepSize > 1.0d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 1.0d );
+            discretizedStepSize = discretize( initialStepSize, 1.0d );
         }
         else if ( initialStepSize > 0.1d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.1d );
+            discretizedStepSize = discretize( initialStepSize, 0.1d );
         }
         else if ( initialStepSize > 0.01d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.01d );
+            discretizedStepSize = discretize( initialStepSize, 0.01d );
         }
         else if ( initialStepSize > 0.001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.001d );
+            discretizedStepSize = discretize( initialStepSize, 0.001d );
         }
         else if ( initialStepSize > 0.0001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.0001d );
+            discretizedStepSize = discretize( initialStepSize, 0.0001d );
         }
         else if ( initialStepSize > 0.00001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.00001d );
+            discretizedStepSize = discretize( initialStepSize, 0.00001d );
         }
         else if ( initialStepSize > 0.000001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.000001d );
+            discretizedStepSize = discretize( initialStepSize, 0.000001d );
         }
         else if ( initialStepSize > 0.0000001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.0000001d );
+            discretizedStepSize = discretize( initialStepSize, 0.0000001d );
         }
         else if ( initialStepSize > 0.00000001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.00000001d );
+            discretizedStepSize = discretize( initialStepSize, 0.00000001d );
         }
         else if ( initialStepSize > 0.000000001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.000000001d );
+            discretizedStepSize = discretize( initialStepSize, 0.000000001d );
         }
         else if ( initialStepSize > 0.0000000001d ) {
-            discretizedStepSize = discretize(
-                    initialStepSize, 0.0000000001d );
+            discretizedStepSize = discretize( initialStepSize, 0.0000000001d );
         }
-        
+
         return discretizedStepSize;
     }
 
     /**
+     * Discretizes a double to the nearest multiple of a given multiplier.
+     *
+     * @param number     The double to be discretized
+     * @param multiplier The multiplier to use for discretization
+     * @return The nearest multiple of a given multiplier to a specified double
+     */
+    public static double discretize( final double number,
+                                     final double multiplier ) {
+        if ( multiplier == 0.0d ) {
+            return number;
+        }
+
+        return multiplier * FastMath.round( number / multiplier );
+    }
+
+    /**
      * Returns a Rayleigh-distributed Gaussian random number.
-     * 
+     *
      * @return a Rayleigh-distributed Gaussian random number
      */
     public static double nextRayleighRandom() {
@@ -776,10 +745,6 @@ public final class MathUtilities {
         // NOTE: This does not follow textbook examples and should probably be
         //  replaced at some point. Apache Commons RNG doesn't have Rayleigh.
         return FastMath.hypot( x, y );
-    }
-    
-    public static long getBase10Exponent( final double val ) {
-        return ( long ) FastMath.floor( FastMath.log10( val ) );
     }
 
     // Given a number, round up to the nearest power of ten (times 1, 2, or 5).
@@ -801,9 +766,13 @@ public final class MathUtilities {
         return valAdjusted;
     }
 
+    public static long getBase10Exponent( final double val ) {
+        return ( long ) FastMath.floor( FastMath.log10( val ) );
+    }
+
     /**
-     * Returns the simple square of an integer. 
-     * 
+     * Returns the simple square of an integer.
+     *
      * @param x the integer to square
      * @return the simple square of an integer
      */
@@ -812,8 +781,8 @@ public final class MathUtilities {
     }
 
     /**
-     * Returns the simple square of a long. 
-     * 
+     * Returns the simple square of a long.
+     *
      * @param x the long integer to square
      * @return the simple square of a long
      */
@@ -822,8 +791,8 @@ public final class MathUtilities {
     }
 
     /**
-     * Returns the simple square of a float. 
-     * 
+     * Returns the simple square of a float.
+     *
      * @param x the single-precision number to square
      * @return the simple square of a float
      */
@@ -832,20 +801,9 @@ public final class MathUtilities {
     }
 
     /**
-     * Returns the simple square of a double. 
-     * 
-     * @param x the double-precision number to square
-     * @return the simple square of a double
-     */
-    public static double sqr( final double x ) {
-        return x * x;
-    }
-
-    /**
      * Returns a new {@link Complex} object from an existing {@link Complex}.
      *
-     * @param z
-     *            A {@link Complex} object to use for cloning
+     * @param z A {@link Complex} object to use for cloning
      * @return A new {@link Complex} object cloned from a reference
      *         {@link Complex}
      */
@@ -857,22 +815,29 @@ public final class MathUtilities {
      * Returns a new {@link Complex} as the square of a referenced
      * {@link Complex} value.
      *
-     * @param z
-     *            A {@link Complex} object to use for computing the square
+     * @param z A {@link Complex} object to use for computing the square
      * @return <tt>Complex</tt> square z1 * z1
      */
     public static Complex sqrComplex( final Complex z ) {
-        return new Complex(
-                sqr( z.getReal() ) - sqr( z.getImaginary() ),
-                2.0d * ( z.getReal() * z.getImaginary() ) );
+        return new Complex( sqr( z.getReal() ) - sqr( z.getImaginary() ),
+                            2.0d * ( z.getReal() * z.getImaginary() ) );
     }
 
     /**
-     * Returns the L2 norm of a {@code Complex} number, which is the sum of
-     * the squares of the real and imaginary parts.
+     * Returns the simple square of a double.
      *
-     * @param z
-     *            A {@link Complex} object to use to compute the norm
+     * @param x the double-precision number to square
+     * @return the simple square of a double
+     */
+    public static double sqr( final double x ) {
+        return x * x;
+    }
+
+    /**
+     * Returns the L2 norm of a {@code Complex} number, which is the sum of the
+     * squares of the real and imaginary parts.
+     *
+     * @param z A {@link Complex} object to use to compute the norm
      * @return a {@code double} containing the norm of the {@code Complex}
      *         number
      */
@@ -884,8 +849,7 @@ public final class MathUtilities {
      * Returns the phase of a {@code Complex} number. Note that this method
      * duplicates the functionality of the {@code arg()} method.
      *
-     * @param z
-     *            A {@link Complex} object to measure for phase
+     * @param z A {@link Complex} object to measure for phase
      * @return Phase of <tt>Complex</tt> object in <i> radians</i>
      */
     public static double phase( final Complex z ) {
@@ -896,10 +860,9 @@ public final class MathUtilities {
      * Compares two <code>Complex</code> values numerically according to their
      * absolute values.
      *
-     * @param complex
-     *            the <code>Complex</code> value to be compared to.
-     * @param anotherComplex
-     *            the <code>Complex</code> to use for comparing to the first.
+     * @param complex        the <code>Complex</code> value to be compared to.
+     * @param anotherComplex the <code>Complex</code> to use for comparing to
+     *                       the first.
      * @return the value <code>0</code> if the absolute value of the argument
      *         <code>anotherComplex</code> is equal to the absolute value of
      *         this <code>Complex</code>; a value less than <code>0</code> if

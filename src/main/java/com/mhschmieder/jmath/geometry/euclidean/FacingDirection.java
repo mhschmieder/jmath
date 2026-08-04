@@ -39,11 +39,11 @@ import java.util.Locale;
 /**
  * <code>FacingDirection</code> is an enumeration for facing direction values
  * relevant to three-dimensional objects in a two-dimensional projection plane.
- *
+ * <p>
  * NOTE: Other than for Presentation String, this is now redundant with JavaFX.
  */
-public enum FacingDirection implements Labeled< FacingDirection >,
-        Abbreviated< FacingDirection > {
+public enum FacingDirection
+        implements Labeled< FacingDirection >, Abbreviated< FacingDirection > {
     RIGHT( "Right", "r" ),
     LEFT( "Left", "l" );
 
@@ -56,15 +56,15 @@ public enum FacingDirection implements Labeled< FacingDirection >,
         abbreviation = pAbbreviation;
     }
 
-    @Override
-    public String label() {
-        return label;
+    public static FacingDirection canonicalValueOf( final String canonicalFacingDirection ) {
+        return ( canonicalFacingDirection != null )
+               ?
+               valueOf( canonicalFacingDirection.toUpperCase( Locale.ENGLISH ) )
+               : defaultValue();
     }
 
-    @Override
-    public FacingDirection valueOfLabel( final String text ) {
-        return ( FacingDirection ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
+    public static FacingDirection defaultValue() {
+        return RIGHT;
     }
 
     @Override
@@ -74,9 +74,13 @@ public enum FacingDirection implements Labeled< FacingDirection >,
 
     @Override
     public FacingDirection valueOfAbbreviation( final String abbreviatedText ) {
-        return ( FacingDirection ) EnumUtilities
-                .getAbbreviatedEnumFromAbbreviation(
-                        abbreviatedText, values() );
+        return ( FacingDirection ) EnumUtilities.getAbbreviatedEnumFromAbbreviation(
+                abbreviatedText,
+                values() );
+    }
+
+    public final String toCanonicalString() {
+        return toString().toLowerCase( Locale.ENGLISH );
     }
 
     @Override
@@ -87,18 +91,14 @@ public enum FacingDirection implements Labeled< FacingDirection >,
         return label();
     }
 
-    public static FacingDirection defaultValue() {
-        return RIGHT;
+    @Override
+    public String label() {
+        return label;
     }
 
-    public static FacingDirection canonicalValueOf(
-            final String canonicalFacingDirection ) {
-        return ( canonicalFacingDirection != null )
-            ? valueOf( canonicalFacingDirection.toUpperCase( Locale.ENGLISH ) )
-            : defaultValue();
-    }
-
-    public final String toCanonicalString() {
-        return toString().toLowerCase( Locale.ENGLISH );
+    @Override
+    public FacingDirection valueOfLabel( final String text ) {
+        return ( FacingDirection ) EnumUtilities.getLabeledEnumFromLabel( text,
+                                                                          values() );
     }
 }

@@ -36,10 +36,11 @@ import com.mhschmieder.jcommons.lang.Labeled;
 
 /**
  * Enumerate the models used for counting and/or distributing a population over
- * a given area. One model's implementation may convert internally to the other.
+ * a given area. One model's implementation may convert internally to the
+ * other.
  */
-public enum PopulationModel implements Indexed< PopulationModel >,
-        Labeled< PopulationModel > {
+public enum PopulationModel
+        implements Indexed< PopulationModel >, Labeled< PopulationModel > {
     DENSITY( 0, "Populate by Density" ),
     QUANTITY( 1, "Populate by Quantity" );
 
@@ -52,6 +53,10 @@ public enum PopulationModel implements Indexed< PopulationModel >,
         label = pLabel;
     }
 
+    public static PopulationModel defaultValue() {
+        return DENSITY;
+    }
+
     @Override
     public int index() {
         return index;
@@ -59,19 +64,8 @@ public enum PopulationModel implements Indexed< PopulationModel >,
 
     @Override
     public PopulationModel valueOfIndex( final int pIndex ) {
-        return ( PopulationModel ) EnumUtilities.getIndexedEnumFromIndex(
-                pIndex, values() );
-    }
-
-    @Override
-    public String label() {
-        return label;
-    }
-
-    @Override
-    public PopulationModel valueOfLabel( final String text ) {
-        return ( PopulationModel ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
+        return ( PopulationModel ) EnumUtilities.getIndexedEnumFromIndex( pIndex,
+                                                                          values() );
     }
 
     @Override
@@ -82,7 +76,14 @@ public enum PopulationModel implements Indexed< PopulationModel >,
         return label();
     }
 
-    public static PopulationModel defaultValue() {
-        return DENSITY;
+    @Override
+    public String label() {
+        return label;
+    }
+
+    @Override
+    public PopulationModel valueOfLabel( final String text ) {
+        return ( PopulationModel ) EnumUtilities.getLabeledEnumFromLabel( text,
+                                                                          values() );
     }
 }

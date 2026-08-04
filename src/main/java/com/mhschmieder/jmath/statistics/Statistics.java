@@ -42,42 +42,18 @@ import java.util.Arrays;
 public final class Statistics {
 
     /**
-     * The default constructor is disabled, as this is a static utilities class.
+     * The default constructor is disabled, as this is a static utilities
+     * class.
      */
-    private Statistics() {}
-
-    // This method calculates the cumulative probability curve of array x at
-    // locations y.
-    // TODO: See if this can be replaced -- even inside a summation loop that
-    // is ours -- with something in Apache Commons Math Distribution package.
-    public static double[] cumulativeProbability( final double[] x, final double[] y ) {
-        // Sort into ascending order
-        Arrays.sort( x );
-
-        // Create cumulative probability array
-        final double[] cumProb = new double[ y.length ];
-
-        // Calculate cumulative counts
-        for ( int i = 0; i < y.length; i++ ) {
-            for ( final double element : x ) {
-                if ( element <= y[ i ] ) {
-                    cumProb[ i ]++;
-                }
-            }
-        }
-
-        // Convert to cumulative probability
-        for ( int i = 0; i < y.length; i++ ) {
-            cumProb[ i ] = cumProb[ i ] / x.length;
-        }
-
-        return cumProb;
+    private Statistics() {
     }
 
     // This method linearly interpolates the (x,y) data at points x0. In this
     // method, if x0 < x[0], y0 = y[0], and if x0 > x[x.length-1], y0 =
     // y[x.length-1].
-    public static double interp1( final double[] x, final double[] y, final double x0 ) {
+    public static double interp1( final double[] x,
+                                  final double[] y,
+                                  final double x0 ) {
         // We know data will be monotonically increasing, so don't bother to
         // check here. Get straight to it.
         double y0;
@@ -86,40 +62,6 @@ public final class Statistics {
         }
         else if ( x0 >= x[ x.length - 1 ] ) {
             y0 = y[ x.length - 1 ];
-        }
-        else {
-            // Find the proper interval.
-            int i = 0;
-            for ( i = 0; i < ( x.length - 1 ); i++ ) {
-                if ( ( x0 >= x[ i ] ) && ( x0 <= x[ i + 1 ] ) ) {
-                    break;
-                }
-            }
-
-            // Now interpolate the value.
-            if ( i < x.length ) {
-                final double dx = ( x0 - x[ i ] ) / ( x[ i + 1 ] - x[ i ] );
-                y0 = y[ i ] + ( ( y[ i + 1 ] - y[ i ] ) * dx );
-            }
-            else {
-                y0 = y[ x.length - 1 ];
-            }
-        }
-
-        return y0;
-    }
-
-    // This method linearly interpolates the (x,y) data at points x0. In this
-    // method, if x0 < x[0], y0 = NaN, and if x0 > x[x.length-1], y0 = NaN.
-    public static double interp2( final double[] x, final double[] y, final double x0 ) {
-        // We know data will be monotonically increasing, so don't bother to
-        // check here. Get straight to it.
-        double y0;
-        if ( x0 < x[ 0 ] ) {
-            y0 = Double.NaN;
-        }
-        else if ( x0 > x[ x.length - 1 ] ) {
-            y0 = Double.NaN;
         }
         else {
             // Find the proper interval.
@@ -176,7 +118,8 @@ public final class Statistics {
     // NOTE: Apache Commons Math has a StatUtils class with percentile
     // methods, but they only take a single percentile input value.
     // TODO: See if we can call one of those methods inside a loop.
-    public static double[] percentile( final double[] x, final double[] p ) {
+    public static double[] percentile( final double[] x,
+                                       final double[] p ) {
         // Get percentile locations array
         final double[] percLoc = new double[ p.length ];
 
@@ -200,6 +143,71 @@ public final class Statistics {
         }
 
         return percLoc;
+    }
+
+    // This method calculates the cumulative probability curve of array x at
+    // locations y.
+    // TODO: See if this can be replaced -- even inside a summation loop that
+    // is ours -- with something in Apache Commons Math Distribution package.
+    public static double[] cumulativeProbability( final double[] x,
+                                                  final double[] y ) {
+        // Sort into ascending order
+        Arrays.sort( x );
+
+        // Create cumulative probability array
+        final double[] cumProb = new double[ y.length ];
+
+        // Calculate cumulative counts
+        for ( int i = 0; i < y.length; i++ ) {
+            for ( final double element : x ) {
+                if ( element <= y[ i ] ) {
+                    cumProb[ i ]++;
+                }
+            }
+        }
+
+        // Convert to cumulative probability
+        for ( int i = 0; i < y.length; i++ ) {
+            cumProb[ i ] = cumProb[ i ] / x.length;
+        }
+
+        return cumProb;
+    }
+
+    // This method linearly interpolates the (x,y) data at points x0. In this
+    // method, if x0 < x[0], y0 = NaN, and if x0 > x[x.length-1], y0 = NaN.
+    public static double interp2( final double[] x,
+                                  final double[] y,
+                                  final double x0 ) {
+        // We know data will be monotonically increasing, so don't bother to
+        // check here. Get straight to it.
+        double y0;
+        if ( x0 < x[ 0 ] ) {
+            y0 = Double.NaN;
+        }
+        else if ( x0 > x[ x.length - 1 ] ) {
+            y0 = Double.NaN;
+        }
+        else {
+            // Find the proper interval.
+            int i = 0;
+            for ( i = 0; i < ( x.length - 1 ); i++ ) {
+                if ( ( x0 >= x[ i ] ) && ( x0 <= x[ i + 1 ] ) ) {
+                    break;
+                }
+            }
+
+            // Now interpolate the value.
+            if ( i < x.length ) {
+                final double dx = ( x0 - x[ i ] ) / ( x[ i + 1 ] - x[ i ] );
+                y0 = y[ i ] + ( ( y[ i + 1 ] - y[ i ] ) * dx );
+            }
+            else {
+                y0 = y[ x.length - 1 ];
+            }
+        }
+
+        return y0;
     }
 
     public static double range( final double[] x ) {

@@ -36,7 +36,5 @@ package com.mhschmieder.jmath;
  * Both parts are stored as double-precision numbers so that NaN and other
  * special numbers can be retained in the split. Both can be used as ints.
  */
-public record ModfResult(
-        double fractionalPart,
-        double integerPart ) {
+public record ModfResult( double fractionalPart, double integerPart ) {
 }

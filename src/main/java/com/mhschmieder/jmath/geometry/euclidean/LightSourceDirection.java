@@ -38,16 +38,26 @@ import com.mhschmieder.jcommons.lang.Labeled;
  * Light source direction for applying shading to on-screen graphics.
  */
 public enum LightSourceDirection implements Indexed< LightSourceDirection >,
-        Labeled< LightSourceDirection > {
-    /** No light source; no shading */
+                                            Labeled< LightSourceDirection > {
+    /**
+     * No light source; no shading
+     */
     NONE( 0, "None" ),
-    /** Lighting from the northwest, or top left of screen */
+    /**
+     * Lighting from the northwest, or top left of screen
+     */
     NORTHWEST( 1, "Light from Northwest" ),
-    /** Lighting from the northeast, or top right of screen */
+    /**
+     * Lighting from the northeast, or top right of screen
+     */
     NORTHEAST( 2, "Light from Northeast" ),
-    /** Lighting from the southwest, or bottom left of screen */
+    /**
+     * Lighting from the southwest, or bottom left of screen
+     */
     SOUTHWEST( 3, "Light from Southwest" ),
-    /** Lighting from the southeast, or bottom right of screen */
+    /**
+     * Lighting from the southeast, or bottom right of screen
+     */
     SOUTHEAST( 4, "Light from Southeast" );
 
     private final int index;
@@ -59,6 +69,10 @@ public enum LightSourceDirection implements Indexed< LightSourceDirection >,
         label = pLabel;
     }
 
+    public static LightSourceDirection defaultValue() {
+        return NONE;
+    }
+
     @Override
     public int index() {
         return index;
@@ -67,17 +81,8 @@ public enum LightSourceDirection implements Indexed< LightSourceDirection >,
     @Override
     public LightSourceDirection valueOfIndex( final int pIndex ) {
         return ( LightSourceDirection ) EnumUtilities.getIndexedEnumFromIndex(
-                pIndex, values() );
-    }
-
-    public String label() {
-        return label;
-    }
-
-    @Override
-    public LightSourceDirection valueOfLabel( final String text ) {
-        return ( LightSourceDirection ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
+                pIndex,
+                values() );
     }
 
     @Override
@@ -88,7 +93,14 @@ public enum LightSourceDirection implements Indexed< LightSourceDirection >,
         return label();
     }
 
-    public static LightSourceDirection defaultValue() {
-        return NONE;
+    public String label() {
+        return label;
+    }
+
+    @Override
+    public LightSourceDirection valueOfLabel( final String text ) {
+        return ( LightSourceDirection ) EnumUtilities.getLabeledEnumFromLabel(
+                text,
+                values() );
     }
 }

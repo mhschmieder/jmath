@@ -31,9 +31,5 @@
 /**
  * This package contains the jmath Library's classes relating to all types of
  * Geometry, primarily focused on convenient enumerations for core concepts.
- *
- * @version 1.0
- *
- * @author Mark Schmieder
  */
 package com.mhschmieder.jmath.geometry;

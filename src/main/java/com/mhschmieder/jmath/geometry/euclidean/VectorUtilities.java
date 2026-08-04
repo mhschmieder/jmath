@@ -42,9 +42,11 @@ import org.apache.commons.math3.util.FastMath;
 public class VectorUtilities {
 
     /**
-     * The default constructor is disabled, as this is a static utilities class.
+     * The default constructor is disabled, as this is a static utilities
+     * class.
      */
-    private VectorUtilities() {}
+    private VectorUtilities() {
+    }
 
     public static Vector2D copyPoint2D( final Vector2D point2D ) {
         return new Vector2D( point2D.getX(), point2D.getY() );
@@ -61,103 +63,91 @@ public class VectorUtilities {
     public static Vector2D negatePoint2D( final Vector2D point2D,
                                           final Axis axis ) {
         Vector2D negatedPoint = Vector2D.ZERO;
-        
+
         switch ( axis ) {
-        case X:
-            negatedPoint = new Vector2D( -point2D.getX(), point2D.getY() );
-            break;
-        case Y:
-            negatedPoint = new Vector2D( point2D.getX(), -point2D.getY() );
-            break;
-        case Z:
-            negatedPoint = new Vector2D( point2D.getX(), point2D.getY() );
-            break;
-        default:
-            break;
+            case X:
+                negatedPoint = new Vector2D( -point2D.getX(), point2D.getY() );
+                break;
+            case Y:
+                negatedPoint = new Vector2D( point2D.getX(), -point2D.getY() );
+                break;
+            case Z:
+                negatedPoint = new Vector2D( point2D.getX(), point2D.getY() );
+                break;
+            default:
+                break;
         }
-        
+
         return negatedPoint;
     }
 
     public static Vector3D negatePoint3D( final Vector3D point3D ) {
-        return new Vector3D(
-                -point3D.getX(),
-                -point3D.getY(),
-                -point3D.getZ() );
+        return new Vector3D( -point3D.getX(),
+                             -point3D.getY(),
+                             -point3D.getZ() );
     }
 
     public static Vector3D negatePoint3D( final Vector3D point3D,
                                           final Axis axis ) {
         Vector3D negatedPoint = Vector3D.ZERO;
-        
+
         switch ( axis ) {
-        case X:
-            negatedPoint = new Vector3D(
-                    -point3D.getX(),
-                    point3D.getY(),
-                    point3D.getZ() );
-            break;
-        case Y:
-            negatedPoint = new Vector3D(
-                    point3D.getX(),
-                    -point3D.getY(),
-                    point3D.getZ() );
-            break;
-        case Z:
-            negatedPoint = new Vector3D(
-                    point3D.getX(),
-                    point3D.getY(),
-                    -point3D.getZ() );
-            break;
-        default:
-            break;
+            case X:
+                negatedPoint = new Vector3D( -point3D.getX(),
+                                             point3D.getY(),
+                                             point3D.getZ() );
+                break;
+            case Y:
+                negatedPoint = new Vector3D( point3D.getX(),
+                                             -point3D.getY(),
+                                             point3D.getZ() );
+                break;
+            case Z:
+                negatedPoint = new Vector3D( point3D.getX(),
+                                             point3D.getY(),
+                                             -point3D.getZ() );
+                break;
+            default:
+                break;
         }
-        
+
         return negatedPoint;
     }
 
-    public static Vector3D exchangeCoordinates(
-            final Vector3D point3D,
-            final OrthogonalAxes orthogonalAxes ) {
+    public static Vector3D exchangeCoordinates( final Vector3D point3D,
+                                                final OrthogonalAxes orthogonalAxes ) {
         Vector3D swappedPoint = Vector3D.ZERO;
-        
+
         switch ( orthogonalAxes ) {
-        case XY:
-            swappedPoint = new Vector3D(
-                    point3D.getY(),
-                    point3D.getX(),
-                    point3D.getZ() );
-            break;
-        case XZ:
-            swappedPoint = new Vector3D(
-                    point3D.getZ(),
-                    point3D.getY(),
-                    point3D.getX() );
-            break;
-        case YZ:
-            swappedPoint = new Vector3D(
-                    point3D.getX(),
-                    point3D.getZ(),
-                    point3D.getY() );
-            break;
-        default:
-            break; 
+            case XY:
+                swappedPoint = new Vector3D( point3D.getY(),
+                                             point3D.getX(),
+                                             point3D.getZ() );
+                break;
+            case XZ:
+                swappedPoint = new Vector3D( point3D.getZ(),
+                                             point3D.getY(),
+                                             point3D.getX() );
+                break;
+            case YZ:
+                swappedPoint = new Vector3D( point3D.getX(),
+                                             point3D.getZ(),
+                                             point3D.getY() );
+                break;
+            default:
+                break;
         }
-        
+
         return swappedPoint;
     }
 
     /**
      * Returns the distance between two point coordinate pairs.
      *
-     * @param x1
-     *            the X coordinate of the first specified point
-     * @param y1
-     *            the Y coordinate of the first specified point
-     * @param x2
-     *            the X coordinate of the second specified point
-     * @param y2
-     *            the Y coordinate of the second specified point
+     * @param x1 the X coordinate of the first specified point
+     * @param y1 the Y coordinate of the first specified point
+     * @param x2 the X coordinate of the second specified point
+     * @param y2 the Y coordinate of the second specified point
      * @return the distance between the two specified coordinate pairs.
      * @since 1.2
      */
@@ -174,14 +164,11 @@ public class VectorUtilities {
      * Returns the distance from one <code>Vector2D</code> to another specified
      * point coordinate pair.
      *
-     * @param pt
-     *            The point from which to measure distance
-     * @param px
-     *            the X coordinate of the specified point to be measured against
-     *            this <code>Vector2D</code>
-     * @param py
-     *            the Y coordinate of the specified point to be measured against
-     *            this <code>Vector2D</code>
+     * @param pt The point from which to measure distance
+     * @param px the X coordinate of the specified point to be measured against
+     *           this <code>Vector2D</code>
+     * @param py the Y coordinate of the specified point to be measured against
+     *           this <code>Vector2D</code>
      * @return the distance between one <code>Vector2D</code> and another
      *         specified point coordinate pair
      * @since 1.2
@@ -198,10 +185,9 @@ public class VectorUtilities {
      * Returns the distance from one <code>Vector2D</code> to another specified
      * <code>Vector2D</code>.
      *
-     * @param pt1
-     *            The reference point to use for measuring another point
-     * @param pt2
-     *            The specified point to be measured against the reference point
+     * @param pt1 The reference point to use for measuring another point
+     * @param pt2 The specified point to be measured against the reference
+     *            point
      * @return the square of the distance between one <code>Vector2D</code> and
      *         another specified <code>Vector2D</code>.
      * @since 1.2
@@ -214,14 +200,10 @@ public class VectorUtilities {
     /**
      * Returns the square of the distance between two points coordinate pairs.
      *
-     * @param x1
-     *            the X coordinate of the first specified point
-     * @param y1
-     *            the Y coordinate of the first specified point
-     * @param x2
-     *            the X coordinate of the second specified point
-     * @param y2
-     *            the Y coordinate of the second specified point
+     * @param x1 the X coordinate of the first specified point
+     * @param y1 the Y coordinate of the first specified point
+     * @param x2 the X coordinate of the second specified point
+     * @param y2 the Y coordinate of the second specified point
      * @return the square of the distance between the two specified coordinate
      *         pairs.
      * @since 1.2
@@ -239,14 +221,11 @@ public class VectorUtilities {
      * Returns the square of the distance from one <code>Vector2D</code> to
      * another specified point coordinate pair.
      *
-     * @param point
-     *            The point from which to measure distance
-     * @param px
-     *            the X coordinate of the specified point to be measured against
-     *            this <code>Vector2D</code>
-     * @param py
-     *            the Y coordinate of the specified point to be measured against
-     *            this <code>Vector2D</code>
+     * @param point The point from which to measure distance
+     * @param px    the X coordinate of the specified point to be measured
+     *              against this <code>Vector2D</code>
+     * @param py    the Y coordinate of the specified point to be measured
+     *              against this <code>Vector2D</code>
      * @return the square of the distance between one <code>Vector2D</code> and
      *         another specified point coordinate pair.
      * @since 1.2
@@ -263,45 +242,24 @@ public class VectorUtilities {
      * Returns the square of the distance from one <code>Vector2D</code> to
      * another specified <code>Vector2D</code>.
      *
-     * @param pt1
-     *            The reference point to use for measuring another point
-     * @param pt2
-     *            The specified point to be measured against the reference point
+     * @param pt1 The reference point to use for measuring another point
+     * @param pt2 The specified point to be measured against the reference
+     *            point
      * @return the square of the distance between one <code>Vector2D</code> and
      *         another specified <code>Vector2D</code>.
      * @since 1.2
      */
-    public static double distanceSq( final Vector2D pt1, final Vector2D pt2 ) {
+    public static double distanceSq( final Vector2D pt1,
+                                     final Vector2D pt2 ) {
         return pt1.distanceSq( pt2 );
     }
 
     /**
-     * Returns a point which lies in the middle between one coordinate pair
-     * and another coordinate pair.
+     * Returns a point which lies in the middle between one
+     * <code>Vector2D</code> and another specified <code>Vector2D</code>.
      *
-     * @param x1 the X coordinate of the start endpoint
-     * @param y1 the Y coordinate of the start endpoint
-     * @param x2 the X coordinate of the end endpoint
-     * @param y2 the Y coordinate of the end endpoint
-     * @return the point in the middle of the two specified points
-     */
-    public static Vector2D midpoint( final double x1, 
-                                     final double y1,
-                                     final double x2,
-                                     final double y2 ) {
-        return new Vector2D(
-                0.5d * ( x2 - x1 ),
-                0.5d * ( y2 - y1 ) );
-    }
-
-    /**
-     * Returns a point which lies in the middle between one <code>Vector2D</code>
-     * and another specified <code>Vector2D</code>.
-     *
-     * @param pt1
-     *            The start point to use for finding the midpoint
-     * @param pt2
-     *            The end point to use for finding the midpoint
+     * @param pt1 The start point to use for finding the midpoint
+     * @param pt2 The end point to use for finding the midpoint
      * @return the point in the middle of the two specified points
      * @throws NullPointerException if either specified {@code point} is null
      */
@@ -311,14 +269,28 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the quadrant of a 2D point relative to an origin:
-     * 1, 2, 3, or 4
+     * Returns a point which lies in the middle between one coordinate pair and
+     * another coordinate pair.
      *
-     * @param point
-     *            The point to judge relative to the origin
-     * @param origin
-     *            The origin to reference for determining the quadrant of the
-     *            supplied 2D point
+     * @param x1 the X coordinate of the start endpoint
+     * @param y1 the Y coordinate of the start endpoint
+     * @param x2 the X coordinate of the end endpoint
+     * @param y2 the Y coordinate of the end endpoint
+     * @return the point in the middle of the two specified points
+     */
+    public static Vector2D midpoint( final double x1,
+                                     final double y1,
+                                     final double x2,
+                                     final double y2 ) {
+        return new Vector2D( 0.5d * ( x2 - x1 ), 0.5d * ( y2 - y1 ) );
+    }
+
+    /**
+     * Returns the quadrant of a 2D point relative to an origin: 1, 2, 3, or 4
+     *
+     * @param point  The point to judge relative to the origin
+     * @param origin The origin to reference for determining the quadrant of the
+     *               supplied 2D point
      * @return The quadrant number for a supplied 2D point
      */
     public static int getQuadrant( final Vector2D point,
@@ -336,14 +308,12 @@ public class VectorUtilities {
     }
 
     /**
-     * Returns the octant of a 3D point relative to an origin:
-     * 1, 2, 3, 4, 5, 6, 7, or 8
+     * Returns the octant of a 3D point relative to an origin: 1, 2, 3, 4, 5, 6,
+     * 7, or 8
      *
-     * @param point
-     *            The point to judge relative to the origin
-     * @param origin
-     *            The origin to reference for determining the octant of the
-     *            supplied 3D point
+     * @param point  The point to judge relative to the origin
+     * @param origin The origin to reference for determining the octant of the
+     *               supplied 3D point
      * @return The octant number for a supplied 3D point
      */
     public static int getOctant( final Vector3D point,
@@ -372,26 +342,25 @@ public class VectorUtilities {
         return 4;
     }
 
-    public static Vector2D projectToPlane(
-            final Vector3D point3D,
-            final OrthogonalAxes orthogonalAxes ) {
+    public static Vector2D projectToPlane( final Vector3D point3D,
+                                           final OrthogonalAxes orthogonalAxes ) {
         // Project a 3D point to a plane defined by an orthogonal axis pair.
         Vector2D projectedPoint = Vector2D.ZERO;
-        
+
         switch ( orthogonalAxes ) {
-        case XY:
-            projectedPoint = new Vector2D( point3D.getX(), point3D.getY() );
-            break;
-        case XZ:
-            projectedPoint = new Vector2D( point3D.getX(), point3D.getZ() );
-            break;
-        case YZ:
-            projectedPoint = new Vector2D( point3D.getY(), point3D.getZ() );
-            break;
-        default:
-            break;
+            case XY:
+                projectedPoint = new Vector2D( point3D.getX(), point3D.getY() );
+                break;
+            case XZ:
+                projectedPoint = new Vector2D( point3D.getX(), point3D.getZ() );
+                break;
+            case YZ:
+                projectedPoint = new Vector2D( point3D.getY(), point3D.getZ() );
+                break;
+            default:
+                break;
         }
-        
+
         return projectedPoint;
     }
 
@@ -400,57 +369,56 @@ public class VectorUtilities {
                                           final double angleRadians ) {
         double axis1Value = 0.0d;
         double axis2Value = 0.0d;
-    
+
         switch ( orthogonalAxes ) {
-        case XY:
-            axis1Value = point3D.getX();
-            axis2Value = point3D.getY();
-            break;
-        case XZ:
-            axis1Value = point3D.getX();
-            axis2Value = point3D.getZ();
-            break;
-        case YZ:
-            axis1Value = point3D.getY();
-            axis2Value = point3D.getZ();
-            break;
-        default:
-            break;
+            case XY:
+                axis1Value = point3D.getX();
+                axis2Value = point3D.getY();
+                break;
+            case XZ:
+                axis1Value = point3D.getX();
+                axis2Value = point3D.getZ();
+                break;
+            case YZ:
+                axis1Value = point3D.getY();
+                axis2Value = point3D.getZ();
+                break;
+            default:
+                break;
         }
-    
-        final double axis1ValueRotated = ( axis1Value * FastMath.cos(
-                angleRadians ) ) - ( axis2Value * FastMath.sin(
+
+        final double axis1ValueRotated =
+                ( axis1Value * FastMath.cos( angleRadians ) ) - ( axis2Value
+                                                                  * FastMath.sin(
                         angleRadians ) );
-    
-        final double axis2ValueRotated = ( axis1Value * FastMath.sin(
-                angleRadians ) ) + ( axis2Value * FastMath.cos(
+
+        final double axis2ValueRotated =
+                ( axis1Value * FastMath.sin( angleRadians ) ) + ( axis2Value
+                                                                  * FastMath.cos(
                         angleRadians ) );
-    
+
         Vector3D rotatedPoint = Vector3D.ZERO;
-        
+
         switch ( orthogonalAxes ) {
-        case XY:
-            rotatedPoint = new Vector3D(
-                    axis1ValueRotated,
-                    axis2ValueRotated,
-                    0.0d );
-            break;
-        case XZ:
-            rotatedPoint = new Vector3D(
-                    axis1ValueRotated,
-                    0.0d,
-                    axis2ValueRotated );
-            break;
-        case YZ:
-            rotatedPoint = new Vector3D(
-                    0.0d,
-                    axis1ValueRotated,
-                    axis2ValueRotated );
-            break;
-        default:
-            break;
+            case XY:
+                rotatedPoint = new Vector3D( axis1ValueRotated,
+                                             axis2ValueRotated,
+                                             0.0d );
+                break;
+            case XZ:
+                rotatedPoint = new Vector3D( axis1ValueRotated,
+                                             0.0d,
+                                             axis2ValueRotated );
+                break;
+            case YZ:
+                rotatedPoint = new Vector3D( 0.0d,
+                                             axis1ValueRotated,
+                                             axis2ValueRotated );
+                break;
+            default:
+                break;
         }
-        
+
         return rotatedPoint;
     }
 }

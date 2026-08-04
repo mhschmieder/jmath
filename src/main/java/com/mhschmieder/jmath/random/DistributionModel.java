@@ -35,17 +35,26 @@ import com.mhschmieder.jcommons.lang.Indexed;
 import com.mhschmieder.jcommons.lang.Labeled;
 
 /**
- * Enumeration of strategies for adjusting values based on a distribution model.
+ * Enumeration of strategies for adjusting values based on a distribution
+ * model.
  */
-public enum DistributionModel implements Indexed< DistributionModel >,
-        Labeled< DistributionModel > {
-    /** Unconstrained by min/max range or random distribution model */
+public enum DistributionModel
+        implements Indexed< DistributionModel >, Labeled< DistributionModel > {
+    /**
+     * Unconstrained by min/max range or random distribution model
+     */
     NONE( 0, "None (Unconstrained)" ),
-    /** Constrained by min/max range sans distribution model */
+    /**
+     * Constrained by min/max range sans distribution model
+     */
     BOUNDED( 1, "Bounded (Constrained)" ),
-    /** Constrained by min/max range with Uniform Distribution Model */
+    /**
+     * Constrained by min/max range with Uniform Distribution Model
+     */
     UNIFORM_DISTRIBUTION( 2, "Uniform Distribution" ),
-    /** Constrained by min/max range with Gamma Distribution Model */
+    /**
+     * Constrained by min/max range with Gamma Distribution Model
+     */
     GAMMA_DISTRIBUTION( 3, "Gamma Distribution" );
 
     private final int index;
@@ -57,6 +66,10 @@ public enum DistributionModel implements Indexed< DistributionModel >,
         label = pLabel;
     }
 
+    public static DistributionModel defaultValue() {
+        return UNIFORM_DISTRIBUTION;
+    }
+
     @Override
     public int index() {
         return index;
@@ -65,7 +78,16 @@ public enum DistributionModel implements Indexed< DistributionModel >,
     @Override
     public DistributionModel valueOfIndex( final int pIndex ) {
         return ( DistributionModel ) EnumUtilities.getIndexedEnumFromIndex(
-                pIndex, values() );
+                pIndex,
+                values() );
+    }
+
+    @Override
+    public String toString() {
+        // NOTE: This override takes care of displaying the current choice in
+        //  its custom label form when a Combo Box is hosted by a Table Cell. It
+        //  also addresses an issue with the Jackson parser if in a JSON file.
+        return label();
     }
 
     @Override
@@ -75,19 +97,7 @@ public enum DistributionModel implements Indexed< DistributionModel >,
 
     @Override
     public DistributionModel valueOfLabel( final String text ) {
-        return ( DistributionModel ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
-    }
-
-    public static DistributionModel defaultValue() {
-        return UNIFORM_DISTRIBUTION;
-    }
-
-    @Override
-    public String toString() {
-        // NOTE: This override takes care of displaying the current choice in
-        //  its custom label form when a Combo Box is hosted by a Table Cell. It
-        //  also addresses an issue with the Jackson parser if in a JSON file.
-        return label();
+        return ( DistributionModel ) EnumUtilities.getLabeledEnumFromLabel( text,
+                                                                            values() );
     }
 }

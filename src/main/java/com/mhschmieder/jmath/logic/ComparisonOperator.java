@@ -43,7 +43,7 @@ import com.mhschmieder.jcommons.lang.Labeled;
  * predates the addition of Java Generics.
  */
 public enum ComparisonOperator implements Indexed< ComparisonOperator >,
-        Labeled< ComparisonOperator > {
+                                          Labeled< ComparisonOperator > {
     NONE( 0, "Ignore" ),
     EQUAL( 3, "=" ),
     NOT_EQUAL( 4, "≠" ),
@@ -61,6 +61,10 @@ public enum ComparisonOperator implements Indexed< ComparisonOperator >,
         label = pLabel;
     }
 
+    public static ComparisonOperator defaultValue() {
+        return NONE;
+    }
+
     @Override
     public int index() {
         return index;
@@ -69,7 +73,16 @@ public enum ComparisonOperator implements Indexed< ComparisonOperator >,
     @Override
     public ComparisonOperator valueOfIndex( final int pIndex ) {
         return ( ComparisonOperator ) EnumUtilities.getIndexedEnumFromIndex(
-                pIndex, values() );
+                pIndex,
+                values() );
+    }
+
+    @Override
+    public String toString() {
+        // NOTE: This override takes care of displaying the current choice in
+        //  its custom label form when a Combo Box is hosted by a Table Cell. It
+        //  also addresses an issue with the Jackson parser if in a JSON file.
+        return label();
     }
 
     @Override
@@ -80,18 +93,7 @@ public enum ComparisonOperator implements Indexed< ComparisonOperator >,
     @Override
     public ComparisonOperator valueOfLabel( final String text ) {
         return ( ComparisonOperator ) EnumUtilities.getLabeledEnumFromLabel(
-                text, values() );
-    }
-
-    public static ComparisonOperator defaultValue() {
-        return NONE;
-    }
-
-    @Override
-    public String toString() {
-        // NOTE: This override takes care of displaying the current choice in
-        //  its custom label form when a Combo Box is hosted by a Table Cell. It
-        //  also addresses an issue with the Jackson parser if in a JSON file.
-        return label();
+                text,
+                values() );
     }
 }

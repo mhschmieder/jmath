@@ -33,33 +33,34 @@ package com.mhschmieder.jmath.statistics;
 import java.util.List;
 
 /**
- * Methods related to computing the cumulative product of an array of values,
- * in place in most cases but also returned for flexibility of coding context.
+ * Methods related to computing the cumulative product of an array of values, in
+ * place in most cases but also returned for flexibility of coding context.
  * <p>
  * Note that for most if not all methods, the start index should be the second
  * array element and not the first, as first iteration grabs previous element.
  * <p>
  * This utility class is designed to be at least a partial replacement for the
  * Matlab function with the same name ("cumprod"), but as Matlab has gone
- * strongly in a Functional programming direction the past few years, it may
- * be difficult to come up with exact equivalent in Java for each possibility.
+ * strongly in a Functional programming direction the past few years, it may be
+ * difficult to come up with exact equivalent in Java for each possibility.
  */
 public class CumulativeProduct {
 
     /**
-     * The default constructor is disabled, as this is a static utilities class.
+     * The default constructor is disabled, as this is a static utilities
+     * class.
      */
-    private CumulativeProduct() {}
+    private CumulativeProduct() {
+    }
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[0] * ... * x[i]</code>.
      *
-     * @param x
-     *            The array of doubles for which to compute the cumulative
-     *            product.
+     * @param x The array of doubles for which to compute the cumulative
+     *          product.
      * @return A reference to <code>x</code>.
      */
     public static double[] cumprod( final double[] x ) {
@@ -68,19 +69,16 @@ public class CumulativeProduct {
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[startIndex-1] * ... * x[stopIndex]</code>.
      *
-     * @param x
-     *            The array of doubles for which to compute the cumulative
-     *            product.
-     * @param startIndex
-     *            The first index to use for applying the product against the
-     *            previous array element
-     * @param stopIndex
-     *            The final index of the array to use for applying cumulative
-     *            product
+     * @param x          The array of doubles for which to compute the
+     *                   cumulative product.
+     * @param startIndex The first index to use for applying the product against
+     *                   the previous array element
+     * @param stopIndex  The final index of the array to use for applying
+     *                   cumulative product
      * @return A reference to <code>x</code>.
      */
     public static double[] cumprod( final double[] x,
@@ -94,12 +92,11 @@ public class CumulativeProduct {
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[0] * ... * x[i]</code>.
      *
-     * @param x
-     *            The array of ints for which to compute the cumulative product.
+     * @param x The array of ints for which to compute the cumulative product.
      * @return A reference to <code>x</code>.
      */
     public static int[] cumprod( final int[] x ) {
@@ -108,18 +105,16 @@ public class CumulativeProduct {
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[startIndex-1] * ... * x[stopIndex]</code>.
      *
-     * @param x
-     *            The array of ints for which to compute the cumulative product.
-     * @param startIndex
-     *            The first index to use for applying the product against the
-     *            previous array element
-     * @param stopIndex
-     *            The final index of the array to use for applying cumulative
-     *            product
+     * @param x          The array of ints for which to compute the cumulative
+     *                   product.
+     * @param startIndex The first index to use for applying the product against
+     *                   the previous array element
+     * @param stopIndex  The final index of the array to use for applying
+     *                   cumulative product
      * @return A reference to <code>x</code>.
      */
     public static int[] cumprod( final int[] x,
@@ -133,13 +128,11 @@ public class CumulativeProduct {
 
     /**
      * Computes the cumulative product of the specified array in place.
-     *
+     * <p>
      * Each element <code>x[i]</code> is replaced with
      * <code>x[0] * ... * x[i]</code>.
      *
-     * @param x
-     *            The array of longs for which to compute the cumulative
-     *            product.
+     * @param x The array of longs for which to compute the cumulative product.
      * @return A reference to <code>x</code>.
      */
     public static long[] cumprod( final long[] x ) {
@@ -152,15 +145,12 @@ public class CumulativeProduct {
      * Each element <code>x[i]</code> is replaced with
      * <code>x[startIndex-1] * ... * x[stopIndex]</code>.
      *
-     * @param x
-     *            The array of longs for which to compute the cumulative
-     *            product.
-     * @param startIndex
-     *            The first index to use for applying the product against the
-     *            previous array element
-     * @param stopIndex
-     *            The final index of the array to use for applying cumulative
-     *            product
+     * @param x          The array of longs for which to compute the cumulative
+     *                   product.
+     * @param startIndex The first index to use for applying the product against
+     *                   the previous array element
+     * @param stopIndex  The final index of the array to use for applying
+     *                   cumulative product
      * @return A reference to <code>x</code>.
      */
     public static long[] cumprod( final long[] x,
@@ -175,13 +165,12 @@ public class CumulativeProduct {
     /**
      * Computes the cumulative product of the specified <code>List</code> in
      * place.
-     *
+     * <p>
      * Each element <code>x.get(i)</code> is replaced with
      * <code>x.get(0) * ... * x.get(1)</code>.
      *
-     * @param x
-     *            The <code>List</code> of doubles for which to compute the
-     *            cumulative product.
+     * @param x The <code>List</code> of doubles for which to compute the
+     *          cumulative product.
      * @return A reference to <code>x</code>.
      */
     public static List< Double > cumprod( final List< Double > x ) {
@@ -191,15 +180,14 @@ public class CumulativeProduct {
     /**
      * Computes the cumulative product of the specified <code>List</code> in
      * place.
-     *
+     * <p>
      * Each element <code>x.get(i)</code> is replaced with
      * <code>x.get(0) * ... * x.get(1)</code>.
      *
-     * @param x
-     *            The <code>List</code> of doubles for which to compute the
-     *            cumulative product.
+     * @param x          The <code>List</code> of doubles for which to compute
+     *                   the cumulative product.
      * @param startIndex the first index to use for accumulation in the list
-     * @param stopIndex the final index to use for accumulation in the list
+     * @param stopIndex  the final index to use for accumulation in the list
      * @return A reference to <code>x</code>.
      */
     public static List< Double > cumprod( final List< Double > x,

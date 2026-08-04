@@ -38,23 +38,26 @@ import java.util.Random;
 public final class RandomNumberUtilities {
 
     /**
-     * The default constructor is disabled, as this is a static utilities class.
+     * The default constructor is disabled, as this is a static utilities
+     * class.
      */
-    private RandomNumberUtilities() {}
+    private RandomNumberUtilities() {
+    }
 
     /**
      * Returns the next random integer that is a valid collection index.
      * <p>
      * This method guarantees that we always use a valid index between zero and
-     * size-1, using a uniform distribution of equal probability for each index.
+     * size-1, using a uniform distribution of equal probability for each
+     * index.
      *
-     * @param randomProvider the Random instance to query for next random integer
-     * @param collection the collection for which we need a valid index
+     * @param randomProvider the Random instance to query for next random
+     *                       integer
+     * @param collection     the collection for which we need a valid index
      * @return the next random integer that is a valid collection index
      */
-    public static int getRandomIndex(
-            final UniformRandomProvider randomProvider,
-            final Collection< ? > collection ) {
+    public static int getRandomIndex( final UniformRandomProvider randomProvider,
+                                      final Collection< ? > collection ) {
         return getRandomIndex( randomProvider, collection.size() );
     }
 
@@ -62,22 +65,23 @@ public final class RandomNumberUtilities {
      * Returns the next random integer that is a valid collection index.
      * <p>
      * This method guarantees that we always use a valid index between zero and
-     * size-1, using a uniform distribution of equal probability for each index.
+     * size-1, using a uniform distribution of equal probability for each
+     * index.
      * <p>
      * For this overload of {@code getRandomIndex()}, the collection size is
      * passed in and can be from Collection.size() or from static array length.
      * <p>
      * NOTE: The call to {@code nextInt()} on {@link Random} applies the passed
-     *  argument as an exclusive bound rather than an inclusive bound, so there
-     *  is no need to subtract one from the collection's size.
+     * argument as an exclusive bound rather than an inclusive bound, so there
+     * is no need to subtract one from the collection's size.
      *
-     * @param randomProvider the Random instance to query for next random integer
+     * @param randomProvider the Random instance to query for next random
+     *                       integer
      * @param collectionSize the size of the collection we need an index for
      * @return the next random integer that is a valid collection index
      */
-    public static int getRandomIndex(
-            final UniformRandomProvider randomProvider,
-            final int collectionSize ) {
+    public static int getRandomIndex( final UniformRandomProvider randomProvider,
+                                      final int collectionSize ) {
         return randomProvider.nextInt( collectionSize );
     }
 }
